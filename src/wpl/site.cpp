@@ -231,7 +231,7 @@ void write_page(Page& page, Form& form, const Site& site)
     string tail = replace_text(form.tail, "#depth#", page.depth);
     file <<
         head << menu <<
-        "<div id='content'" << (menu.empty() ? " class='nomenu'" : "") << ">\n\n"
+        "<div id='content'" << (menu.empty() ? " class='nomenu'" : "") << ">\n"
         ;
     if (page.filename == "map.htm") {
         file << "<h2>Site Map</h2>\n\n<table class='map'>\n";
