@@ -40,11 +40,34 @@ namespace pt = boost::property_tree;
 
 static Page* prev_page = nullptr;
 
+static string markup_html( const string& raw )
+{
+    string htm;
+    for ( const char& ch : raw ) {
+        switch ( ch )
+        {
+        case '&':
+            htm += "&amp;";
+            break;
+        case '<':
+            htm += "&lt;";
+            break;
+        case '>':
+            htm += "&gt;";
+            break;
+        default:
+            htm += ch;
+            break;
+        }
+    }
+    return htm;
+}
+
 void read_page(Page& page, pt::ptree& tree, const string& depth, const string& path, Page* parent)
 {
 	page.folder = tree.get<string>("folder", "");
 	page.name = tree.get<string>("name", "");
-    page.label = tree.get<string>("label", "");
+    page.label = tree.get<string>( "label", "" );
     if (page.label.empty()) {
         page.label = page.name;
     }
@@ -54,8 +77,8 @@ void read_page(Page& page, pt::ptree& tree, const string& depth, const string& p
     if (prev_page) {
         title = prev_page->title;
     }
-	page.title = tree.get<string>("title", title);
-	page.subtitle = tree.get<string>("subtitle", page.label);
+    page.title = tree.get<string>( "title", title );
+    page.subtitle = tree.get<string>( "subtitle", page.label );
     page.css_file = tree.get<string>("css", "");
     page.parent = parent;
     string cur_path = path;
@@ -100,6 +123,9 @@ void read_page(Page& page, pt::ptree& tree, const string& depth, const string& p
                 page.linked.push_back(p);
             }
 	    }
+        page.label = markup_html( page.label );
+        page.title = markup_html( page.title );
+        page.subtitle = markup_html( page.subtitle );
     }
 }
 

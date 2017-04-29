@@ -34,7 +34,7 @@
 #define VERSION_CONFIG   " debug"
 #endif
 
-#define VERSION_NUM   "0.1.1"
+#define VERSION_NUM   "0.1.2"
 
 
 #define VERSION   VERSION_NUM VERSION_STATUS VERSION_CONFIG
@@ -56,6 +56,7 @@ const char* wm_title = "WebPageLayout - V" VERSION "\n"
   3feb17  Work started.
  27feb17  v0.1.0  First working version written.
  16apr17  v0.1.1  Remove extra newline when copying content.
+ 29apr17  v0.1.2  Ensure special characters are escaped (ie & < >).
 
 *****************************************************************************/
 
