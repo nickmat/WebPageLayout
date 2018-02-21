@@ -4,7 +4,7 @@
  * Purpose:     Write website header.
  * Author:      Nick Matthews
  * Created:     18th Febuary 2017
- * Copyright:   Copyright (c) 2017, Nick Matthews.
+ * Copyright:   Copyright (c) 2017 ~ 2018, Nick Matthews.
  * Licence:     Boost
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -59,6 +59,7 @@ struct Site {
 	Page   website;
     Page   sitemap;
     string unix_name;
+    string github_name;
 	string favicon;
 	string livery_css;
 	string home_url;

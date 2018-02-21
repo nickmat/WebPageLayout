@@ -4,7 +4,7 @@
  * Purpose:     Process layout functions.
  * Author:      Nick Matthews
  * Created:     4th Febuary 2017
- * Copyright:   Copyright (c) 2017, Nick Matthews.
+ * Copyright:   Copyright (c) 2017 ~ 2018, Nick Matthews.
  * Licence:     Boost
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -151,8 +151,9 @@ void process_layout_file( const string& filename, const string& source, const st
         return;
     }
 
-    site.unix_name = root.get<string>("unix-name", "");
-	site.favicon = root.get<string>("favicon", "");
+    site.unix_name = root.get<string>( "unix-name", "" );
+    site.github_name = root.get<string>( "github-name", "" );
+    site.favicon = root.get<string>("favicon", "");
 	site.livery_css = root.get<string>("livery-css", "");
 	site.home_url = root.get<string>("home-url", "");
     site.full_icon = root.get<string>("full-icon", "");

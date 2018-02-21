@@ -4,7 +4,7 @@
  * Purpose:     Write website.
  * Author:      Nick Matthews
  * Created:     18th Febuary 2017
- * Copyright:   Copyright (c) 2017, Nick Matthews.
+ * Copyright:   Copyright (c) 2017 ~ 2018, Nick Matthews.
  * Licence:     Boost
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -50,40 +50,56 @@ void create_form(const Site& site, Form& form)
 		" <title>" + site.project + " - #title#</title>\n"
 		" <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />\n"
         " <link rel='icon' type='image/png' href='#depth#" + site.favicon + "' />\n"
-		" <link rel='stylesheet' type='text/css' href='#depth#" + site.livery_css + "' />\n"
+        " <link rel='stylesheet' type='text/css' href='#depth#sys/livery.css' />\n"
+        " <link rel='stylesheet' type='text/css' href='#depth#" + site.livery_css + "' />\n"
         "#css-files#"
 		"</head>\n"
-		"<body>\n\n"
-		" <h1>\n"
-		"  <a  href='" + site.home_url + "'>\n"
-		"   <img id='logo' src='#depth#" + site.full_icon + "' alt='Logo' />\n"
-		"  </a>\n"
+		"<body>\n"
+        "\n"
+
+        " <div class='heading'>\n"
+        "  <div class='logo'>\n"
+        "   <a  href='" + site.home_url + "'>\n"
+        "    <img class='logo' src='#depth#sys/logo2.png' alt='Logo' />\n"
+        "   </a>\n"
+        "  </div>\n"
         "  " + site.project + "#title-1#<br />" + "#sub-title#\n"
-		" </h1>\n\n"
-        " <div id='page'>\n\n"
-        "  <div id='crumbs'>\n"
+        "  <div class='clear'></div>\n"
+        " </div>\n"
+        "\n"
+
         "#crumbs#"
-        "  </div>\n\n"
-		;
+        "\n"
+    ;
     form.menu =
-        "  <div id='menu'>\n"
+        " <div class='menu'>\n"
+        "  <div class='m-panel'>\n"
         "#side-menu#"
-        "   <p style='text-align: center;'>\n"
+        "   <div class='menu-plus'>\n"
         "    The project page at<br />\n"
-        "    <a href='http://sourceforge.net/projects/" + site.unix_name + "'>\n"
+        "    <a href='https://sourceforge.net/projects/" + site.unix_name + "'>\n"
         "     <img src='#depth#sys/sf-logo-13.jpg'\n"
         "      width='120' height='30'\n"
-        "      alt='Get HistoryCal at SourceForge.net.Fast, secure and Free Open Source software downloads'\n"
+        "      alt='Get HistoryCal at SourceForge.net'\n"
         "     />\n"
-        "    </a>\n"
-        "    <a href='http://sourceforge.net/projects/" + site.unix_name + "/files'>\n"
+        "    </a><br />\n"
+        "    Code repository at<br />\n"
+        "    <a href='https://github.com/" + site.github_name + "'>\n"
+        "     <img src='#depth#sys/GitHub_Logo.png' height='30' alt='GitHub' />\n"
+        "    </a><br />\n"
+        "    <a href='https://sourceforge.net/projects/" + site.unix_name + "/files'>\n"
         "     <img src='#depth#sys/download-button.png' alt='Download' />\n"
         "    </a>\n"
-        "   </p>\n"
-        "  </div>\n\n"
-        ;
+        "   </div>\n"
+        "  </div>\n"
+        " </div>\n"
+        "\n"
+    ;
 	form.tail =
-        " <hr />\n\n"
+        "#crumbs#"
+        "\n"
+        " <div class='tail'></div>\n"
+        "\n"
         " <div id='valid'>\n"
         "  <p>\n"
         "   <a href='http://validator.w3.org/check?uri=referer'>\n"
@@ -91,12 +107,12 @@ void create_form(const Site& site, Form& form)
         "   </a>\n"
         "  </p>\n"
         " </div>\n\n"
-        " <div id='create-date'>#create-date#</div>\n\n"
+        " <div id='create-date'>#create-date#</div>\n"
+        "\n"
         + get_file_contents(site.stats_text) + "\n"
-        " </div>\n\n"
 		"</body>\n"
 		"</html>\n"
-		;
+    ;
 }
 
 string replace_text(const string& str, const string& old_str, const string& new_str)
@@ -138,11 +154,7 @@ string make_css_link(const Page& page)
 
 string make_crumb(const string& file, int level, const string& css_class, const string& label)
 {
-    string level_str;
-    if (level) {
-        level_str = " level" + std::to_string(level);
-    }
-    return "   <a href='" + file + "' class='m-item" + css_class + level_str + "'>"
+    return "   <a href='" + file + "' class='m-item" + css_class + "'>"
         + label + "</a>\n";
 }
 
@@ -160,7 +172,7 @@ string make_menu_item(Page* page, const string& depth)
 {
     string item;
     if (page->name.empty()) {
-        return "   <span class='m-item'>" + page->label + "</span>\n";
+        return "   <div class='m-item'>" + page->label + "</div>\n";
     }
     return "   <a href='" + depth + page->filename + "' class='m-item'>"
         + page->label + "</a>\n";
@@ -196,7 +208,7 @@ void write_page(Page& page, Form& form, const Site& site)
     for (auto p : page.linked) {
         write_page(*p, form, site);
     }
-    fs::path path = site.target + "/" + site.website.folder + "/" + page.filename;
+    fs::path path = site.target + site.website.folder + "/" + page.filename;
     fs::create_directories(path.parent_path());
 	fs::ofstream file{path};
     string title = page.title.empty() ? "" : " - " + page.title;
@@ -207,16 +219,17 @@ void write_page(Page& page, Form& form, const Site& site)
     head = replace_text(head, "#css-files#", make_css_link(page));
     string crumb = get_prev_crumb(page.parent, page.depth);
     crumb += make_crumb(page.name+".htm", page.level, " thispage", page.label);
-    if (page.prev.empty()) {
-        page.prev = "map.htm";
-        form.map_next = page.filename;
-    }
-    crumb += make_crumb(page.depth + page.prev, 0, " prev", "&lt;&lt;");
     if (page.next.empty()) {
         page.next = "map.htm";
         form.map_prev = page.filename;
     }
-    crumb += make_crumb(page.depth + page.next, 0, " next", "&gt;&gt;");
+    crumb += make_crumb(page.depth + page.next, 0, " next", "\342\226\272" );
+    if (page.prev.empty()) {
+        page.prev = "map.htm";
+        form.map_next = page.filename;
+    }
+    crumb += make_crumb(page.depth + page.prev, 0, " next", "\342\227\204" );
+    crumb = " <div class=\"crumbs\">\n" + crumb + " </div>\n";
     head = replace_text(head, "#crumbs#", crumb);
     string menu;
     if (page.menu) {
@@ -229,6 +242,7 @@ void write_page(Page& page, Form& form, const Site& site)
         menu = replace_text(menu, "#side-menu#", menu_items);
     }
     string tail = replace_text(form.tail, "#depth#", page.depth);
+    tail = replace_text( tail, "#crumbs#", crumb );
     file <<
         head << menu <<
         "<div id='content'" << (menu.empty() ? " class='nomenu'" : "") << ">\n"

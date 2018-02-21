@@ -4,7 +4,7 @@
  * Purpose:     Version constants.
  * Author:      Nick Matthews
  * Created:     3rd Febuary 2017
- * Copyright:   Copyright (c) 2017, Nick Matthews.
+ * Copyright:   Copyright (c) 2017 ~ 2018, Nick Matthews.
  * Licence:     Boost
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -34,7 +34,7 @@
 #define VERSION_CONFIG   " debug"
 #endif
 
-#define VERSION_NUM   "0.1.2"
+#define VERSION_NUM   "0.1.3"
 
 
 #define VERSION   VERSION_NUM VERSION_STATUS VERSION_CONFIG
@@ -46,7 +46,7 @@ const char* wm_version = VERSION;
 /*! A string containing a long hand version name and copyright message.
  */
 const char* wm_title = "WebPageLayout - V" VERSION "\n"
-                      "Copyright (c) 2017 Nick Matthews\n\n";
+                      "Copyright (c) 2017 ~ 2018 Nick Matthews\n\n";
 
 /*****************************************************************************
 
@@ -57,6 +57,7 @@ const char* wm_title = "WebPageLayout - V" VERSION "\n"
  27feb17  v0.1.0  First working version written.
  16apr17  v0.1.1  Remove extra newline when copying content.
  29apr17  v0.1.2  Ensure special characters are escaped (ie & < >).
+  active  v0.1.3  Rework the pages markup and use new livery.css style.
 
 *****************************************************************************/
 
