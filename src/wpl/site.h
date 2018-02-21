@@ -67,6 +67,7 @@ struct Site {
     string stats_text;
 };
 
+const int g_crumb_step_level = 4;
 
 void write_site(Site& site);
 

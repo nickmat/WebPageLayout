@@ -154,18 +154,35 @@ string make_css_link(const Page& page)
 
 string make_crumb(const string& file, int level, const string& css_class, const string& label)
 {
-    return "   <a href='" + file + "' class='m-item" + css_class + "'>"
+    return "  <a href='" + file + "' class='m-item" + css_class + "'>"
         + label + "</a>\n";
 }
 
-string get_prev_crumb(Page* page, const string& depth)
+string get_prev_crumb( Page* page, const string& depth, int step_level )
 {
-    if (page == nullptr) {
+    if ( page == nullptr ) {
         return "";
     }
-    string crumb = get_prev_crumb(page->parent, depth);
-    crumb += make_crumb(depth + page->filename, page->level, "", page->label);
-    return crumb;
+    string this_crumb = make_crumb( depth + page->filename, page->level, "", page->label );
+    if ( page->parent == nullptr ) {
+        return this_crumb;
+    }
+    string prev_crumb = get_prev_crumb( page->parent, depth, step_level );
+    if ( page->level > step_level ) {
+        return prev_crumb + this_crumb;
+    } 
+    if ( page->level < step_level ) {
+        return "  " + this_crumb + prev_crumb;
+    }
+    return
+        "  <div class=\"dmenu\">\n"
+        "   <div class=\"dm-item m-item\">\342\226\274</div>\n"
+        "   <div class=\"dm-content\">\n"
+        + prev_crumb +
+        "   </div>\n"
+        "  </div> \n"
+        + this_crumb
+    ;
 }
 
 string make_menu_item(Page* page, const string& depth)
@@ -217,18 +234,20 @@ void write_page(Page& page, Form& form, const Site& site)
     head = replace_text(head, "#sub-title#", page.subtitle);
     head = replace_text_all(head, "#depth#", page.depth);
     head = replace_text(head, "#css-files#", make_css_link(page));
-    string crumb = get_prev_crumb(page.parent, page.depth);
+
+    int step_level = page.level - g_crumb_step_level;
+    string crumb = get_prev_crumb( page.parent, page.depth, step_level );
     crumb += make_crumb(page.name+".htm", page.level, " thispage", page.label);
     if (page.next.empty()) {
         page.next = "map.htm";
         form.map_prev = page.filename;
     }
-    crumb += make_crumb(page.depth + page.next, 0, " next", "\342\226\272" );
+    crumb += make_crumb(page.depth + page.next, 0, " nav", "\342\226\272" );
     if (page.prev.empty()) {
         page.prev = "map.htm";
         form.map_next = page.filename;
     }
-    crumb += make_crumb(page.depth + page.prev, 0, " next", "\342\227\204" );
+    crumb += make_crumb(page.depth + page.prev, 0, " nav", "\342\227\204" );
     crumb = " <div class=\"crumbs\">\n" + crumb + " </div>\n";
     head = replace_text(head, "#crumbs#", crumb);
     string menu;

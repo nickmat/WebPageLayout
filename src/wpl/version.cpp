@@ -57,7 +57,7 @@ const char* wm_title = "WebPageLayout - V" VERSION "\n"
  27feb17  v0.1.0  First working version written.
  16apr17  v0.1.1  Remove extra newline when copying content.
  29apr17  v0.1.2  Ensure special characters are escaped (ie & < >).
-  active  v0.1.3  Rework the pages markup and use new livery.css style.
+ 21feb18  v0.1.3  Rework the pages using new livery.css style and markup.
 
 *****************************************************************************/
 
