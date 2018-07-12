@@ -43,6 +43,10 @@ struct Form {
 
 void create_form(const Site& site, Form& form)
 {
+    string site_css;
+    if ( !site.site_css.empty() ) {
+        site_css = " <link rel='stylesheet' type='text/css' href='#depth#" + site.site_css + "' />\n";
+    }
 	form.head =
 		"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>\n"
 		"<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en'>\n"
@@ -51,7 +55,7 @@ void create_form(const Site& site, Form& form)
 		" <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />\n"
         " <link rel='icon' type='image/png' href='#depth#" + site.favicon + "' />\n"
         " <link rel='stylesheet' type='text/css' href='#depth#sys/livery.css' />\n"
-        " <link rel='stylesheet' type='text/css' href='#depth#" + site.livery_css + "' />\n"
+        + site_css +
         "#css-files#"
 		"</head>\n"
 		"<body>\n"
