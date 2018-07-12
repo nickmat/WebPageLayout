@@ -61,7 +61,7 @@ struct Site {
     string unix_name;
     string github_name;
 	string favicon;
-	string livery_css;
+	string site_css;
 	string home_url;
 	string full_icon;
     string stats_text;

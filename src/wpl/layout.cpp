@@ -154,7 +154,7 @@ void process_layout_file( const string& filename, const string& source, const st
     site.unix_name = root.get<string>( "unix-name", "" );
     site.github_name = root.get<string>( "github-name", "" );
     site.favicon = root.get<string>("favicon", "");
-	site.livery_css = root.get<string>("livery-css", "");
+	site.site_css = root.get<string>("site-css", "");
 	site.home_url = root.get<string>("home-url", "");
     site.full_icon = root.get<string>("full-icon", "");
     site.stats_text = root.get<string>("stats-text", "");
