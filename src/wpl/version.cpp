@@ -34,7 +34,7 @@
 #define VERSION_CONFIG   " debug"
 #endif
 
-#define VERSION_NUM   "0.1.3"
+#define VERSION_NUM   "0.2.0"
 
 
 #define VERSION   VERSION_NUM VERSION_STATUS VERSION_CONFIG
@@ -58,6 +58,7 @@ const char* wm_title = "WebPageLayout - V" VERSION "\n"
  16apr17  v0.1.1  Remove extra newline when copying content.
  29apr17  v0.1.2  Ensure special characters are escaped (ie & < >).
  21feb18  v0.1.3  Rework the pages using new livery.css style and markup.
+  active  v0.2.0  Add standard support files.
 
 *****************************************************************************/
 
