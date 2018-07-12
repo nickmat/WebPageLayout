@@ -4,7 +4,7 @@
  * Purpose:     Read content from existing website.
  * Author:      Nick Matthews
  * Created:     22th Febuary 2017
- * Copyright:   Copyright (c) 2017, Nick Matthews.
+ * Copyright:   Copyright (c) 2017 ~ 2018, Nick Matthews.
  * Licence:     Boost
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -28,15 +28,13 @@
 
 #include <string>
 
-using std::string;
-
 struct Content {
-    string text;
-    string create_date;
+    std::string text;
+    std::string create_date;
 };
 
-string todays_date();
-string get_file_contents(const string& filename);
-bool get_content(Content& content, const string& filename);
+std::string todays_date();
+std::string get_file_contents(const std::string& filename);
+bool get_content(Content& content, const std::string& filename);
 
 #endif // SRC_WPL_CONTENT_H_GUARD

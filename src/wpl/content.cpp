@@ -33,6 +33,8 @@
 
 namespace fs = boost::filesystem;
 
+using std::string;
+
 string todays_date()
 {
     using namespace boost::gregorian;

@@ -29,42 +29,39 @@
 #include <string>
 #include <vector>
 
-using std::string;
-using std::vector;
-
 struct Page {
-	string folder;
-	string name;
-	string label;
+    std::string folder;
+    std::string name;
+    std::string label;
     bool map_label;
 	bool   menu;
-	string title;
-	string subtitle;
-    string css_file;
-	vector<Page*> linked;
-    string depth;
+    std::string title;
+    std::string subtitle;
+    std::string css_file;
+    std::vector<Page*> linked;
+    std::string depth;
     int level;
-    string filename;
+    std::string filename;
     Page* parent;
-    string prev;
-    string next;
+    std::string prev;
+    std::string next;
 
     Page() : menu(false), level(0), parent(nullptr) {}
 };
 
 struct Site {
-	string project;
-	string source;
-	string target;
+    std::string project;
+    std::string source;
+    std::string target;
 	Page   website;
     Page   sitemap;
-    string unix_name;
-    string github_name;
-	string favicon;
-	string site_css;
-	string home_url;
-	string full_icon;
-    string stats_text;
+    std::string unix_name;
+    std::string github_name;
+    std::string favicon;
+    std::string site_css;
+    std::string home_url;
+    std::string full_icon;
+    std::string stats_text;
 };
 
 const int g_crumb_step_level = 4;

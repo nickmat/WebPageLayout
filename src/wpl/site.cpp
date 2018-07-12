@@ -33,6 +33,8 @@
 
 namespace fs = boost::filesystem;
 
+using std::string;
+
 struct Form {
 	string head;
     string menu;

@@ -38,6 +38,8 @@
 namespace fs = boost::filesystem;
 namespace pt = boost::property_tree;
 
+using std::string;
+
 static Page* prev_page = nullptr;
 
 static string markup_html( const string& raw )

@@ -4,7 +4,7 @@
  * Purpose:     Process layout functions header.
  * Author:      Nick Matthews
  * Created:     4th Febuary 2017
- * Copyright:   Copyright (c) 2017, Nick Matthews.
+ * Copyright:   Copyright (c) 2017 ~ 2018, Nick Matthews.
  * Licence:     Boost
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -28,8 +28,6 @@
 
 #include <string>
 
-using std::string;
-
-void process_layout_file( const string& filename, const string& source, const string& target );
+void process_layout_file( const std::string& filename, const std::string& source, const std::string& target );
 
 #endif // SRC_WPL_LAYOUT_H_GUARD
