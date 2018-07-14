@@ -55,12 +55,11 @@ struct Site {
     std::string target;
 	Page   website;
     Page   sitemap;
-    std::string unix_name;
-    std::string github_name;
-    std::string favicon;
+    std::string sourceforge_url;
+    std::string github_url;
+    std::string download_url;
     std::string site_css;
     std::string home_url;
-    std::string full_icon;
     std::string stats_text;
 };
 

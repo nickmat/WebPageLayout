@@ -153,12 +153,11 @@ void process_layout_file( const string& filename, const string& source, const st
         return;
     }
 
-    site.unix_name = root.get<string>( "unix-name", "" );
-    site.github_name = root.get<string>( "github-name", "" );
-    site.favicon = root.get<string>("favicon", "");
+    site.sourceforge_url = root.get<string>( "sourceforge-url", "" );
+    site.github_url = root.get<string>( "github-url", "" );
+    site.download_url = root.get<string>( "download-url", "" );
 	site.site_css = root.get<string>("site-css", "");
 	site.home_url = root.get<string>("home-url", "");
-    site.full_icon = root.get<string>("full-icon", "");
     site.stats_text = root.get<string>("stats-text", "");
 
     prev_page = nullptr;

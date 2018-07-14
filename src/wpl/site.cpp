@@ -26,6 +26,7 @@
 #include "site.h"
 
 #include "content.h"
+#include "stdfiles.h"
 
 #include <boost/filesystem.hpp>
 
@@ -55,7 +56,7 @@ void create_form(const Site& site, Form& form)
 		"<head>\n"
 		" <title>" + site.project + " - #title#</title>\n"
 		" <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />\n"
-        " <link rel='icon' type='image/png' href='#depth#" + site.favicon + "' />\n"
+        " <link rel='icon' type='image/png' href='#depth#sys/logo32x32.png' />\n"
         " <link rel='stylesheet' type='text/css' href='#depth#sys/livery.css' />\n"
         + site_css +
         "#css-files#"
@@ -66,7 +67,7 @@ void create_form(const Site& site, Form& form)
         " <div class='heading'>\n"
         "  <div class='logo'>\n"
         "   <a  href='" + site.home_url + "'>\n"
-        "    <img class='logo' src='#depth#sys/logo2.png' alt='Logo' />\n"
+        "    <img class='logo' src='#depth#sys/logo266x100.png' alt='Logo' />\n"
         "   </a>\n"
         "  </div>\n"
         "  " + site.project + "#title-1#<br />" + "#sub-title#\n"
@@ -77,25 +78,39 @@ void create_form(const Site& site, Form& form)
         "#crumbs#"
         "\n"
     ;
+    string sf, gh, dl;
+    if ( !site.sourceforge_url.empty() ) {
+        sf =
+            "    The project page at<br />\n"
+            "    <a href='" + site.sourceforge_url + "'>\n"
+            "     <img src='#depth#sys/sf-logo-13.jpg'\n"
+            "      width='120' height='30'\n"
+            "      alt='SourceForge.net'\n"
+            "     />\n"
+            "    </a><br />\n"
+        ;
+    }
+    if ( !site.github_url.empty() ) {
+        gh =
+            "    Code repository at<br />\n"
+            "    <a href='" + site.github_url + "'>\n"
+            "     <img src='#depth#sys/GitHub_Logo.png' height='30' alt='GitHub' />\n"
+            "    </a><br />\n"
+        ;
+    }
+    if ( !site.download_url.empty() ) {
+        dl =
+            "    <a href='" + site.download_url + "'>\n"
+            "     <img src='#depth#sys/download-button.png' alt='Download' />\n"
+            "    </a>\n"
+        ;
+    }
     form.menu =
         " <div class='menu'>\n"
         "  <div class='m-panel'>\n"
         "#side-menu#"
         "   <div class='menu-plus'>\n"
-        "    The project page at<br />\n"
-        "    <a href='https://sourceforge.net/projects/" + site.unix_name + "'>\n"
-        "     <img src='#depth#sys/sf-logo-13.jpg'\n"
-        "      width='120' height='30'\n"
-        "      alt='Get HistoryCal at SourceForge.net'\n"
-        "     />\n"
-        "    </a><br />\n"
-        "    Code repository at<br />\n"
-        "    <a href='https://github.com/" + site.github_name + "'>\n"
-        "     <img src='#depth#sys/GitHub_Logo.png' height='30' alt='GitHub' />\n"
-        "    </a><br />\n"
-        "    <a href='https://sourceforge.net/projects/" + site.unix_name + "/files'>\n"
-        "     <img src='#depth#sys/download-button.png' alt='Download' />\n"
-        "    </a>\n"
+        + sf + gh + dl +
         "   </div>\n"
         "  </div>\n"
         " </div>\n"
@@ -206,9 +221,9 @@ void output_map_line(fs::ofstream& outfile, const Page& page)
     if (page.name.empty()) {
         return;
     }
-    outfile << "<tr>";
+    outfile << "<tr class='map'>";
     for (int i = 0; i < page.level; i++) {
-        outfile << "<td style='padding-right: 1.5em;'><hr style='border-top: dashed 2pt;' /></td>";
+        outfile << "<td><hr class='dash' /></td>";
     }
     outfile << "<td><a href='" << page.filename << "' class='m-item'>";
     if (page.map_label ) {
@@ -288,7 +303,38 @@ void write_page(Page& page, Form& form, const Site& site)
     file << "</div><!--id=content-->\n\n" << tail;
 }
 
-void write_site(Site& site)
+void write_text_file( const fs::path& path, const char* text )
+{
+    fs::ofstream file( path );
+    file << text;
+}
+
+void write_binary_file( const fs::path& path, const unsigned char* data, size_t size )
+{
+    fs::ofstream file( path, std::ios_base::binary );
+    for ( size_t i = 0; i < size; i++ ) {
+        file << data[i];
+    }
+}
+
+void write_sys_files( Site& site )
+{
+    string path = site.target + site.website.folder + "/sys";
+    fs::create_directories( path );
+    write_text_file( path + "/livery.css", g_livery_css );
+    if ( !site.sourceforge_url.empty() ) {
+        write_binary_file( path + "/sf-logo-13.jpg", g_sf_logo_13_jpg, g_sizeof_sf_logo_13_jpg );
+    }
+    if ( !site.github_url.empty() ) {
+        write_binary_file( path + "/github_logo.png", g_github_logo_png, g_sizeof_github_logo_png );
+    }
+    if ( !site.download_url.empty() ) {
+        write_binary_file( path + "/download-button.png", g_download_button_png, g_sizeof_download_button_png );
+    }
+    write_binary_file( path + "/valid-xhtml10.png", g_valid_xhtml10_png, g_sizeof_valid_xhtml10_png );
+}
+
+void write_site( Site& site )
 {
 	Form form;
 	create_form(site, form);
@@ -301,6 +347,7 @@ void write_site(Site& site)
     site.sitemap.next = form.map_next;
     site.sitemap.parent = &site.website;
     write_page(site.sitemap, form, site);
+    write_sys_files( site );
 }
 
 // End of src/wpl/site.cpp

@@ -15,6 +15,7 @@ set(WM_HEADERS
   ../../src/wpl/content.h
   ../../src/wpl/layout.h
   ../../src/wpl/site.h
+  ../../src/wpl/stdfiles.h
   ../../src/wpl/version.h
 )
 set(WM_SOURCES
@@ -22,6 +23,7 @@ set(WM_SOURCES
   ../../src/wpl/layout.cpp
   ../../src/wpl/main.cpp
   ../../src/wpl/site.cpp
+  ../../src/wpl/stdfiles.cpp
   ../../src/wpl/version.cpp
 )
 add_executable(wpl ${WM_SOURCES} ${WM_HEADERS})
