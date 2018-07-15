@@ -19,10 +19,10 @@ div.heading {
     font-weight: bold;
     text-align: center;
     margin: 0;    
-    background: 8px 8px #fff5cc;
+    background: 8px 8px #color-top#;
     padding: 8px 15px 8px 20px;
-    border-bottom: 4px solid #ffd685;
-    border-right: 2px solid #ffd685;
+    border-bottom: 4px solid #col-border#;
+    border-right: 2px solid #col-border#;
 }
 
 div.heading div.logo {
@@ -142,7 +142,7 @@ div#content {
 div.tail {
     margin: 0;
     padding: 2px;
-    background: 8px 8px #ffd685;
+    background: 8px 8px #col-border#;
 }
 
 #create-date {

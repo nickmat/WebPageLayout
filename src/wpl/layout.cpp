@@ -158,7 +158,9 @@ void process_layout_file( const string& filename, const string& source, const st
     site.download_url = root.get<string>( "download-url", "" );
 	site.site_css = root.get<string>("site-css", "");
 	site.home_url = root.get<string>("home-url", "");
-    site.stats_text = root.get<string>("stats-text", "");
+    site.stats_text = root.get<string>( "stats-text", "" );
+    site.color_top = root.get<string>( "color-top", "" );
+    site.color_border = root.get<string>( "color-border", "" );
 
     prev_page = nullptr;
 	read_page(site.website, root.get_child("site"), "-", "", nullptr);

@@ -321,7 +321,9 @@ void write_sys_files( Site& site )
 {
     string path = site.target + site.website.folder + "/sys";
     fs::create_directories( path );
-    write_text_file( path + "/livery.css", g_livery_css );
+    string livery = replace_text_all( g_livery_css, "#color-top#", site.color_top );
+    livery = replace_text_all( livery, "#col-border#", site.color_border );
+    write_text_file( path + "/livery.css", livery.c_str() );
     if ( !site.sourceforge_url.empty() ) {
         write_binary_file( path + "/sf-logo-13.jpg", g_sf_logo_13_jpg, g_sizeof_sf_logo_13_jpg );
     }

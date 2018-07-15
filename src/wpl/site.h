@@ -61,6 +61,8 @@ struct Site {
     std::string site_css;
     std::string home_url;
     std::string stats_text;
+    std::string color_top;
+    std::string color_border;
 };
 
 const int g_crumb_step_level = 4;
