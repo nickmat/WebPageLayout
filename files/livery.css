@@ -10,7 +10,7 @@ body {
  clear: both;
 }
 
-ul { /* God knows why I need this - isn't css great! */
+ul { /* No idea why I need this - isn't css great! */
     overflow: hidden;
 }
 
@@ -39,15 +39,12 @@ div.clear {
 }
 
 div.menu {
-    width: 166px;
+    width: 158px;
     overflow: hidden;
-    margin: 15px 20px 10px 20px;
+    margin: 15px 20px 20px 6px;
     float: left;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-
-div.m-panel {
-    padding: 5px;
+    border-bottom: 2px solid #999;
+    border-right:  1px solid #999;
 }
 
 div.menu a, div.menu div.m-item {
@@ -68,13 +65,13 @@ div.menu a, div.menu div.m-item {
 
 a.m-item:hover, a.m-item.hover:link, a.m-item.hover:visited, a.m-item.hover:active {
     background-color: #eee;
-    background-image:url(bullet_hov.png);
+    background-image: url(bullet_hov.png);
     background-repeat: no-repeat;
     background-position: left;
 }
 
 a.thispage, a.thispage:hover {
-    background-image:url(bullet_cur.png);
+    background-image: url(bullet_cur.png);
     background-repeat: no-repeat;
     background-position: left;
 }
@@ -107,7 +104,7 @@ div.crumbs .dm-item {
 
 div.crumbs  .dmenu:hover .dm-item {
     background-color: #eee;
-    background-image:url(bullet_cur.png);
+    background-image: url(bullet_cur.png);
     background-repeat: no-repeat;
     background-position: left;
 }
@@ -115,6 +112,7 @@ div.crumbs  .dmenu:hover .dm-item {
 div.crumbs .dm-content {
     display: none;
     position: absolute;
+    margin-left: 10px;
     background-color: white;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -136,7 +134,7 @@ div.crumbs .nav {
 }
 
 div#content {
- margin: 20px;
+    margin: 20px;
 }
 
 div.tail {
