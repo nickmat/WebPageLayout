@@ -81,37 +81,35 @@ void create_form(const Site& site, Form& form)
     string sf, gh, dl;
     if ( !site.sourceforge_url.empty() ) {
         sf =
-            "    The project page at<br />\n"
-            "    <a href='" + site.sourceforge_url + "'>\n"
-            "     <img src='#depth#sys/sf-logo-13.jpg'\n"
-            "      width='120' height='30'\n"
-            "      alt='SourceForge.net'\n"
-            "     />\n"
-            "    </a><br />\n"
+            "   The project page at<br />\n"
+            "   <a href='" + site.sourceforge_url + "'>\n"
+            "    <img src='#depth#sys/sf-logo-13.jpg'\n"
+            "     width='120' height='30'\n"
+            "     alt='SourceForge.net'\n"
+            "    />\n"
+            "   </a><br />\n"
         ;
     }
     if ( !site.github_url.empty() ) {
         gh =
-            "    Code repository at<br />\n"
-            "    <a href='" + site.github_url + "'>\n"
-            "     <img src='#depth#sys/GitHub_Logo.png' height='30' alt='GitHub' />\n"
-            "    </a><br />\n"
+            "   Code repository at<br />\n"
+            "   <a href='" + site.github_url + "'>\n"
+            "    <img src='#depth#sys/GitHub_Logo.png' height='30' alt='GitHub' />\n"
+            "   </a><br />\n"
         ;
     }
     if ( !site.download_url.empty() ) {
         dl =
-            "    <a href='" + site.download_url + "'>\n"
-            "     <img src='#depth#sys/download-button.png' alt='Download' />\n"
-            "    </a>\n"
+            "   <a href='" + site.download_url + "'>\n"
+            "    <img src='#depth#sys/download-button.png' alt='Download' />\n"
+            "   </a>\n"
         ;
     }
     form.menu =
         " <div class='menu'>\n"
-        "  <div class='m-panel'>\n"
         "#side-menu#"
-        "   <div class='menu-plus'>\n"
+        "  <div class='menu-plus'>\n"
         + sf + gh + dl +
-        "   </div>\n"
         "  </div>\n"
         " </div>\n"
         "\n"
@@ -186,6 +184,9 @@ string get_prev_crumb( Page* page, const string& depth, int step_level )
     }
     string this_crumb = make_crumb( depth + page->filename, page->level, "", page->label );
     if ( page->parent == nullptr ) {
+        if ( page->level < step_level ) {
+            return "  " + this_crumb;
+        }
         return this_crumb;
     }
     string prev_crumb = get_prev_crumb( page->parent, depth, step_level );
@@ -195,10 +196,11 @@ string get_prev_crumb( Page* page, const string& depth, int step_level )
     if ( page->level < step_level ) {
         return "  " + this_crumb + prev_crumb;
     }
+    // if page->level == step_level
     return
-        "  <div class=\"dmenu\">\n"
-        "   <div class=\"dm-item m-item\">\342\226\274</div>\n"
-        "   <div class=\"dm-content\">\n"
+        "  <div class='dmenu'>\n"
+        "   <div class='dm-item m-item'>\342\226\274</div>\n"
+        "   <div class='dm-content'>\n"
         + prev_crumb +
         "   </div>\n"
         "  </div> \n"
@@ -210,9 +212,9 @@ string make_menu_item(Page* page, const string& depth)
 {
     string item;
     if (page->name.empty()) {
-        return "   <div class='m-item'>" + page->label + "</div>\n";
+        return "  <div class='m-item'>" + page->label + "</div>\n";
     }
-    return "   <a href='" + depth + page->filename + "' class='m-item'>"
+    return "  <a href='" + depth + page->filename + "' class='m-item'>"
         + page->label + "</a>\n";
 }
 
@@ -277,7 +279,7 @@ void write_page(Page& page, Form& form, const Site& site)
         for (auto mpage : page.linked) {
             menu_items += make_menu_item(mpage, page.depth);
         }
-        menu_items += "   <a href='" + page.depth + "map.htm' class='m-item'>Site Map</a>\n\n";
+        menu_items += "  <a href='" + page.depth + "map.htm' class='m-item'>Site Map</a>\n";
         menu = replace_text_all(form.menu, "#depth#", page.depth);
         menu = replace_text(menu, "#side-menu#", menu_items);
     }
