@@ -69,6 +69,9 @@ void read_page(Page& page, pt::ptree& tree, const string& depth, const string& p
 {
 	page.folder = tree.get<string>("folder", "");
 	page.name = tree.get<string>("name", "");
+    if ( page.name.empty() && !page.folder.empty() ) {
+        page.name = "index";
+    }
     page.label = tree.get<string>( "label", "" );
     if (page.label.empty()) {
         page.label = page.name;
