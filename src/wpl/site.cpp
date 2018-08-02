@@ -94,7 +94,7 @@ void create_form(const Site& site, Form& form)
         gh =
             "   Code repository at<br />\n"
             "   <a href='" + site.github_url + "'>\n"
-            "    <img src='#depth#sys/GitHub_Logo.png' height='30' alt='GitHub' />\n"
+            "    <img src='#depth#sys/github_logo.png' height='30' alt='GitHub' />\n"
             "   </a><br />\n"
         ;
     }
