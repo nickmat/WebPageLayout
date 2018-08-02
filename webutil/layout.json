@@ -3,7 +3,7 @@
 	"home-url": "https://nickmat.github.io/WebPageLayout/website/index.htm",
 	"color-top": "WhiteSmoke",
 	"color-border": "SlateGray",
-	"github-url": "https://github.com/nickmat/tfpWebOutput",
+	"github-url": "https://github.com/nickmat/WebPageLayout",
 	"site": { "folder": "web-new", "subtitle": "Home Page", "label": "Home", "content": [
 		{ "folder": "new", "name": "news", "label": "News" },
 		{ "folder": "man", "label": "V0.1.3 Manual", "title": "V0.1.3 Manual", "subtitle": "Introduction", "content": [
