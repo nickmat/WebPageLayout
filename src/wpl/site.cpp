@@ -325,6 +325,11 @@ void write_sys_files( Site& site )
     fs::create_directories( path );
     string livery = replace_text_all( g_livery_css, "#color-top#", site.color_top );
     livery = replace_text_all( livery, "#col-border#", site.color_border );
+    string heading_logo;
+    if( !site.logo_shadow ) {
+        heading_logo = "box-shadow: none;";
+    }
+    livery = replace_text_all( livery, "#heading-logo#", heading_logo );
     write_text_file( path + "/livery.css", livery.c_str() );
     if ( !site.sourceforge_url.empty() ) {
         write_binary_file( path + "/sf-logo-13.jpg", g_sf_logo_13_jpg, g_sizeof_sf_logo_13_jpg );

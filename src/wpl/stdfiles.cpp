@@ -57,6 +57,7 @@ const char* g_livery_css =  /* livery.css */
  "}\n"
  "div.heading img.logo {\n"
  "box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);\n"
+ "#heading-logo#\n"
  "}\n"
  "div.clear {\n"
  "clear: both;\n"

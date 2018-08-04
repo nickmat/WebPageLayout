@@ -53,8 +53,8 @@ struct Site {
     std::string project;
     std::string source;
     std::string target;
-	Page   website;
-    Page   sitemap;
+	Page        website;
+    Page        sitemap;
     std::string sourceforge_url;
     std::string github_url;
     std::string download_url;
@@ -63,6 +63,7 @@ struct Site {
     std::string stats_text;
     std::string color_top;
     std::string color_border;
+    bool        logo_shadow;
 };
 
 const int g_crumb_step_level = 4;
