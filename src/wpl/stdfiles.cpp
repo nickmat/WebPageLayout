@@ -38,7 +38,7 @@ const char* g_livery_css =  /* livery.css */
  ".clear {\n"
  "clear: both;\n"
  "}\n"
- "ul {\n"
+ "ul, ol {\n"
  "overflow: hidden;\n"
  "}\n"
  "div.heading {\n"

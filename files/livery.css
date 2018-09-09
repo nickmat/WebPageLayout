@@ -10,7 +10,7 @@ body {
  clear: both;
 }
 
-ul { /* No idea why I need this - isn't css great! */
+ul, ol { /* No idea why I need this - isn't css great! */
     overflow: hidden;
 }
 

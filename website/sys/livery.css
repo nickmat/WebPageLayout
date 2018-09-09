@@ -6,7 +6,7 @@ background-color: #fff;
 .clear {
 clear: both;
 }
-ul {
+ul, ol {
 overflow: hidden;
 }
 div.heading {
@@ -25,6 +25,7 @@ padding: 8px;
 }
 div.heading img.logo {
 box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+
 }
 div.clear {
 clear: both;
