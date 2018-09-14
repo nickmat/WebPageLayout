@@ -29,7 +29,41 @@
 
 <div id='content' class='nomenu'>
 
-<h2>Page Under Construction</h2>
+<h2>Introduction</h2>
+<p>
+ When files are shared between projects,
+ then it makes sense to maintain a single copy with this program.
+ These can be text files such as CSS files or image files.
+</p>
+<p>
+ The master copy of these files are held in the <b>files</b> directory.
+ They are integrated into the program using the <a href='https://github.com/nickmat/file2cpp'><b>cpp2file.exe</b></a> program
+ with the <b>files/stdfiles.f2c</b> template file.
+ After changes are made to the master files then (on Windows) the <b>files/makestdfiles.bat</b> is run,
+ which should update the output file <b>src/wpl/stdfiles.cpp</b>.
+</p>
+
+<h2>CSS (Cascading Style Sheets) Files</h2>
+<p>
+ The only CSS file currently output is <b>files/livery.css</b> which is reference by every html page.
+ Before writing this file the program edits it to substitute the projects colours
+ and switch the main logo shadow on-or-off.
+</p>
+
+<h2>Standard Image Files</h2>
+<p>
+ All html files include a valid xhtml logo which is linked to the w3c validation site.
+</p>
+<p>
+ The side navigation menus can be extended to link to important exterior sites
+ using standard logo images. 
+</p>
+<ol>
+  <li><b>files/valid-xhtml10.png</b> - Valid HTML link in all HTML page footers.</li>
+  <li><b>files/github_logo.png</b> - Side menu, link to github repository.</li>
+  <li><b>files/sf-logo-13.jpg</b> - Side menu, link to Sourceforge project page.</li>
+  <li><b>files/download-button.png</b> - Side menu, link to download page.</li>
+</ol>
 
 </div><!--id=content-->
 
