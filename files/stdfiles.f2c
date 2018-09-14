@@ -29,8 +29,8 @@
 
 const char* g_livery_css = @(lrc.c)"livery.css";
 
-const unsigned char g_sf_logo_13_jpg[] = @{sf-logo-13.jpg};
-size_t g_sizeof_sf_logo_13_jpg = sizeof(g_sf_logo_13_jpg);
+const unsigned char g_sf_logo_13_png[] = @{sf-logo-13.png};
+size_t g_sizeof_sf_logo_13_png = sizeof(g_sf_logo_13_png);
 
 const unsigned char g_github_logo_png[] = @{github_logo.png};
 size_t g_sizeof_github_logo_png = sizeof(g_github_logo_png);

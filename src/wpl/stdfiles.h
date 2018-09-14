@@ -28,8 +28,8 @@
 
 extern const char* g_livery_css;
 
-extern const unsigned char g_sf_logo_13_jpg[];
-extern size_t g_sizeof_sf_logo_13_jpg;
+extern const unsigned char g_sf_logo_13_png[];
+extern size_t g_sizeof_sf_logo_13_png;
 
 extern const unsigned char g_github_logo_png[];
 extern size_t g_sizeof_github_logo_png;
