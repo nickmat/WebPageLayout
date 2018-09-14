@@ -4,7 +4,7 @@
  * Purpose:     Main program control.
  * Author:      Nick Matthews
  * Created:     3rd Febuary 2017
- * Copyright:   Copyright (c) 2017, Nick Matthews.
+ * Copyright:   Copyright (c) 2017 ~ 2018, Nick Matthews.
  * Licence:     Boost
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -62,7 +62,15 @@ int main( int argc, char* argv[] )
             return 0;
         }
 
-        if (layout.empty()) {
+        if ( source.empty() ) {
+            std::cerr << "Source folder not given.\n";
+            return 1;
+        }
+        if ( target.empty() ) {
+            std::cerr << "Target folder not given.\n";
+            return 1;
+        }
+        if ( layout.empty() ) {
             std::cerr << "Layout file not given.\n";
             return 1;
         }

@@ -137,25 +137,31 @@ void read_page(Page& page, pt::ptree& tree, const string& depth, const string& p
 void process_layout_file( const string& filename, const string& source, const string& target)
 {
     std::cout << "Layout file is: \"" << filename << "\"\n";
-    string cur_path = fs::current_path().string();
-    fs::path path(cur_path + "/" + filename);
-    std::cout << path.generic_string() << "\n";
-
-    std::cout << "Current path: " << cur_path << '\n';
-    std::cout << filename << " size is: " << fs::file_size( filename ) << '\n';
-
-	pt::ptree root;
-	pt::read_json(filename, root);
-
-	Site site;
-    site.project = root.get<string>("project", "");
-    site.source = cur_path + "/" + root.get<string>("source", source);
-    site.target = cur_path + "/" + root.get<string>("target", target);
-    if (site.source == site.target) {
-        std::cout << "Source and target should not be the same: \"" << site.source << "\"\n";
-        return;
+    fs::path fn_path( filename );
+    if ( fn_path.is_relative() ) {
+        fn_path = fs::current_path() / fn_path;
     }
+    std::cout << fn_path.string() << "\n";
 
+    pt::ptree root;
+    pt::read_json( fn_path.string(), root );
+    Site site;
+
+    fs::path s_path( source );
+    if ( s_path.is_relative() ) {
+        s_path = fs::current_path() / s_path;
+    }
+    site.source = s_path.lexically_normal().string();
+    std::cout << "Source folder: " << site.source << "\n";
+
+    fs::path t_path( target );
+    if ( t_path.is_relative() ) {
+        t_path = fs::current_path() / t_path;
+    }
+    site.target = t_path.lexically_normal().string();
+    std::cout << "Target folder: " << site.target << "\n";
+
+    site.project = root.get<string>("project", "");
     site.sourceforge_url = root.get<string>( "sourceforge-url", "" );
     site.github_url = root.get<string>( "github-url", "" );
     site.download_url = root.get<string>( "download-url", "" );
