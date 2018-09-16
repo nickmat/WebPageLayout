@@ -6,6 +6,6 @@ xcopy /Q /S /I /Y ..\website ..\web-new
 
 wpl --version
 
-wpl --source ../website --target ../ --layout layout.json
+wpl --source ../website --target .. --layout layout.json
 
 pause
