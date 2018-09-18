@@ -28,6 +28,7 @@
 
 #include <string>
 #include <vector>
+#include <set>
 
 struct Page {
     std::string folder;
@@ -59,6 +60,7 @@ struct Site {
     std::string github_url;
     std::string download_url;
     std::string site_css;
+    std::set<std::string> optional_css;
     std::string home_url;
     std::string stats_text;
     std::string color_top;

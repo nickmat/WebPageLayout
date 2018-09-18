@@ -26,7 +26,7 @@
 #include "version.h"
 
 
-#define VERSION_STATUS   " beta"
+#define VERSION_STATUS  "" // " beta"
 
 #if defined(NDEBUG) || !defined(_DEBUG)
 #define VERSION_CONFIG   ""
@@ -58,7 +58,7 @@ const char* wm_title = "WebPageLayout - V" VERSION "\n"
  16apr17  v0.1.1  Remove extra newline when copying content.
  29apr17  v0.1.2  Ensure special characters are escaped (ie & < >).
  21feb18  v0.1.3  Rework the pages using new livery.css style and markup.
-  active  v0.2.0  Add standard support files.
+ 18sep18  v0.2.0  Add standard support files.
 
 *****************************************************************************/
 

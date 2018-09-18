@@ -165,8 +165,8 @@ string make_css_link(const Page& page)
     if (!page.css_file.empty()) {
         link =
             " <link rel='stylesheet' type='text/css' href='"
-            + page.depth + page.css_file + "' />\n"
-            ;
+            + page.depth + "sys/" + page.css_file + ".css' />\n"
+        ;
     }
     return link;
 }
@@ -334,6 +334,21 @@ void write_sys_files( Site& site )
     string filename = path + "/livery.css";
     write_text_file( filename, livery.c_str() );
     std::cout << filename << "\n";
+    for ( auto css_filename : site.optional_css ) {
+        bool found = false;
+        for ( size_t i = 0; i < g_sizeof_optional_css; i++ ) {
+            if ( css_filename == string( g_optional_css[i].filename ) ) {
+                filename = path + "/" + css_filename + ".css";
+                write_text_file( filename, g_optional_css[i].css );
+                std::cout << filename << "\n";
+                found = true;
+                break;
+            }
+        }
+        if ( !found ) {
+            std::cout << "ERROR: " << css_filename << " not found!\n";
+        }
+    }
     if ( !site.sourceforge_url.empty() ) {
         filename = path + "/sf-logo-13.png";
         write_binary_file( filename, g_sf_logo_13_png, g_sizeof_sf_logo_13_png );

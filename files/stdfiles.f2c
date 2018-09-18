@@ -29,6 +29,11 @@
 
 const char* g_livery_css = @(lrc.c)"livery.css";
 
+OptionalCSS g_optional_css[] = {
+    { "big-list", @(lrc.c)"big-list.css" },
+};
+size_t g_sizeof_optional_css = sizeof(g_optional_css) / sizeof(OptionalCSS);
+
 const unsigned char g_sf_logo_13_png[] = @{sf-logo-13.png};
 size_t g_sizeof_sf_logo_13_png = sizeof(g_sf_logo_13_png);
 

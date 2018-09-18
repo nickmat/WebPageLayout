@@ -28,6 +28,14 @@
 
 extern const char* g_livery_css;
 
+struct OptionalCSS {
+    const char* filename;
+    const char* css;
+};
+
+extern OptionalCSS g_optional_css[];
+extern size_t g_sizeof_optional_css;
+
 extern const unsigned char g_sf_logo_13_png[];
 extern size_t g_sizeof_sf_logo_13_png;
 

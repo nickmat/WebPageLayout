@@ -65,7 +65,7 @@ static string markup_html( const string& raw )
     return htm;
 }
 
-void read_page(Page& page, pt::ptree& tree, const string& depth, const string& path, Page* parent)
+void read_page(Page& page, pt::ptree& tree, const string& depth, const string& path, Page* parent, std::set<string>& optcss)
 {
 	page.folder = tree.get<string>("folder", "");
 	page.name = tree.get<string>("name", "");
@@ -85,6 +85,9 @@ void read_page(Page& page, pt::ptree& tree, const string& depth, const string& p
     page.title = tree.get<string>( "title", title );
     page.subtitle = tree.get<string>( "subtitle", page.label );
     page.css_file = tree.get<string>("css", "");
+    if ( !page.css_file.empty() ) {
+        optcss.insert( page.css_file );
+    }
     page.parent = parent;
     string cur_path = path;
     if (!page.name.empty()) {
@@ -124,7 +127,7 @@ void read_page(Page& page, pt::ptree& tree, const string& depth, const string& p
 	    if (tree.count("content")) {
 		    for (pt::ptree::value_type& c : tree.get_child("content")) {
                 Page* p = new Page;
-                read_page(*p, c.second, page.depth, cur_path, &page);
+                read_page(*p, c.second, page.depth, cur_path, &page, optcss);
                 page.linked.push_back(p);
             }
 	    }
@@ -173,7 +176,7 @@ void process_layout_file( const string& filename, const string& source, const st
     site.logo_shadow = root.get<bool>( "logo-shadow", true );
 
     prev_page = nullptr;
-	read_page(site.website, root.get_child("site"), "-", "", nullptr);
+	read_page(site.website, root.get_child("site"), "-", "", nullptr, site.optional_css);
 
 	write_site(site);
 }
