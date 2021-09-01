@@ -4,7 +4,7 @@
  * Purpose:     Version constants.
  * Author:      Nick Matthews
  * Created:     3rd Febuary 2017
- * Copyright:   Copyright (c) 2017 ~ 2018, Nick Matthews.
+ * Copyright:   Copyright (c) 2017 .. 2021, Nick Matthews.
  * Licence:     Boost
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -26,7 +26,7 @@
 #include "version.h"
 
 
-#define VERSION_STATUS  "" // " beta"
+#define VERSION_STATUS "" /* " test" */
 
 #if defined(NDEBUG) || !defined(_DEBUG)
 #define VERSION_CONFIG   ""
@@ -34,7 +34,7 @@
 #define VERSION_CONFIG   " debug"
 #endif
 
-#define VERSION_NUM   "0.2.0"
+#define VERSION_NUM   "0.2.1"
 
 
 #define VERSION   VERSION_NUM VERSION_STATUS VERSION_CONFIG
@@ -46,7 +46,7 @@ const char* wm_version = VERSION;
 /*! A string containing a long hand version name and copyright message.
  */
 const char* wm_title = "WebPageLayout - V" VERSION "\n"
-                      "Copyright (c) 2017 ~ 2018 Nick Matthews\n\n";
+                      "Copyright (c) 2017..2021 Nick Matthews\n\n";
 
 /*****************************************************************************
 
@@ -59,6 +59,7 @@ const char* wm_title = "WebPageLayout - V" VERSION "\n"
  29apr17  v0.1.2  Ensure special characters are escaped (ie & < >).
  21feb18  v0.1.3  Rework the pages using new livery.css style and markup.
  18sep18  v0.2.0  Add standard support files.
+  1sep21  v0.2.1  Add "Notes", "Warning", "Tips" and "Code" styles to livery.css.
 
 *****************************************************************************/
 

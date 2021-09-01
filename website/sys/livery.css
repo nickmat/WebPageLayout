@@ -3,9 +3,6 @@ margin: 0;
 padding: 0;
 background-color: #fff;
 }
-.clear {
-clear: both;
-}
 ul, ol {
 overflow: hidden;
 }
@@ -113,6 +110,33 @@ width: 20px;
 div#content {
 margin: 20px;
 }
+blockquote {
+margin: 0 0 0 35%;
+font: italic 0.9em "Times New Roman", serif;
+text-align: justify;
+padding: 10px;
+border-bottom: 4px solid SlateGray;
+border-right:  2px solid SlateGray;
+}
+blockquote.long {
+margin-left: 20%;
+}
+blockquote.short {
+margin-left: 65%;
+}
+blockquote p {
+margin: 0;
+}
+blockquote p.attribute {
+text-align: right;
+}
+p.img-quote {
+text-align: right;
+}
+p.img-quote img {
+border-bottom: 4px solid SlateGray;
+border-right:  2px solid SlateGray;
+}
 div.tail {
 margin: 0;
 padding: 2px;
@@ -129,9 +153,168 @@ float: right;
 #valid img {
 border-style: none;
 }
-tr.map, td {
-padding: 3px;
+table.map td {
+padding: 5px 0 3px 0;
 }
 hr.dash {
-	border-top: 1px dotted #e8e8e8;
+border-top: 1px dotted #e8e8e8;
+}
+table.basic {
+border: 1px solid black;
+margin: 0.5em 1em;
+border-collapse: collapse;
+}
+table.basic th {
+background-color: Cornsilk;
+text-align: center;
+white-space: nowrap;
+border: 1px solid black;
+padding: 0.15em 0.5em 0.15em 0.5em;
+}
+table.basic td {
+background-color: #fffefd;
+border: 1px solid black;
+padding: 0.1em 0.5em 0.1em 0.5em;
+}
+table.basic td.code {
+font-family: "Courier New", Courier, monospace;
+}
+table.basic td.example {
+background-color: mintcream;
+font-family: "Courier New", Courier, monospace;
+white-space: pre;
+}
+table.data td {
+white-space: pre;
+font-family: "Courier New", Courier, monospace;
+}
+table.data td.note {
+white-space: normal;
+font-family: "Times New Roman", serif;
+}
+table.code {
+border: 1px solid springgreen;
+margin: 0.5em 1em;
+border-collapse: collapse;
+}
+table.code th {
+background-color: Cornsilk;
+text-align: left;
+border: 1px solid springgreen;
+padding: 0.2em 1em;
+}
+table.code td {
+white-space: pre;
+font-family: "Courier New", Courier, monospace;
+background-color: mintcream;
+border: 1px solid springgreen;
+padding: 0.5em 1em 0.75em 1em;
+}
+table.code td.compact {
+padding: 0.1em 0.5em 0.1em 0.5em;
+}
+table.code td.note {
+background-color: #fffefd;
+white-space: normal;
+font-family: "Times New Roman", serif;
+}
+table.code td.note code {
+background-color: #fffefd;
+white-space: pre;
+font-family: "Courier New", Courier, monospace;
+padding: 0;
+}
+table.rfloat {
+display: inline-table;
+float: right;
+margin-top: 0;
+}
+table.lfloat {
+display: inline-table;
+float: left;
+margin-top: 0;
+}
+img.diag {
+padding: 0;
+margin: 0.5em 1em;
+}
+img.rfloat {
+float: right;
+margin-top: 0;
+}
+img.lfloat {
+float: left;
+margin-top: 0;
+}
+.clear {
+clear: both;
+}
+.lclear {
+clear: left;
+}
+.rclear {
+clear: right;
+}
+div.note {
+	margin: 5px 40px 5px 60px;
+	padding: 0 10px;
+	border-bottom: 2px solid darkgreen;
+	border-right:  1px solid darkgreen;
+	color: darkgreen;
+	background-color: greenyellow;
+	overflow: hidden;
+}
+div.note div.inner {
+	margin: 10px 5px 10px 5px;
+	border: 1px solid darkgreen;
+	background-color: greenyellow;
+	padding: 0 15px;
+}
+div.h {
+	font-size: 20px;
+}
+div.warning {
+	margin: 5px 40px 5px 60px;
+	padding: 0 10px;
+	border-bottom: 2px solid darkred;
+	border-right:  1px solid darkred;
+	color: darkred;
+	background-color: lightcoral ;
+	overflow: hidden;
+}
+div.warning div.inner {
+	margin: 10px 5px 10px 5px;
+	border: 1px solid darkred;
+	background-color: lightcoral;
+	padding: 0 15px;
+}
+div.tip {
+	margin: 5px 40px 5px 60px;
+	padding: 0 10px;
+	border-bottom: 2px solid darkorange;
+	border-right:  1px solid darkorange;
+	color: rgb(126, 124, 3);
+	background-color:rgb(255, 243, 136) ;
+	overflow: hidden;
+}
+div.tip div.inner {
+	margin: 10px 5px 10px 5px;
+	border: 1px solid darkorange;
+	background-color: rgb(255, 243, 136);
+	padding: 0 15px;
+}
+div.code {
+	margin: 5px 40px 5px 60px;
+	padding: 0 10px;
+	border-bottom: 2px solid rgb(48, 48, 48);
+	border-right:  1px solid rgb(48, 48, 48);
+	color: rgb(48, 48, 48);
+	background-color:rgb(223, 223, 223);
+	overflow: hidden;
+}
+div.code div.inner {
+	margin: 10px 5px 10px 5px;
+	border: 1px solid rgb(48, 48, 48);
+	padding: 0 15px;
+	overflow-x: auto;
 }
