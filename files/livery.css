@@ -4,6 +4,9 @@ body {
     margin: 0;
     padding: 0;
     background-color: #fff;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+    font-size: 18px;
+    line-height: 1.5;
 }
 
 ul, ol { /* No idea why I need this - isn't css great! */
@@ -42,6 +45,7 @@ div.menu {
     float: left;
     border-bottom: 2px solid #999;
     border-right:  1px solid #999;
+    font-size: 12px;
 }
 
 div.menu a, div.menu div.m-item {
@@ -131,7 +135,9 @@ div.crumbs .nav {
 }
 
 div#content {
-    margin: 20px;
+    margin: auto;
+    padding: 0 20px;
+    max-width: 1200px;
 }
 
 blockquote {
@@ -386,6 +392,8 @@ div.code div.inner {
 	margin: 10px 5px 10px 5px;
 	border: 1px solid rgb(48, 48, 48);
 	padding: 0 15px;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 14px;
 	overflow-x: auto;
 }
 
