@@ -26,7 +26,7 @@
 #include "version.h"
 
 
-#define VERSION_STATUS " Test" /* " test" */
+#define VERSION_STATUS "" /* " test" */
 
 #if defined(NDEBUG) || !defined(_DEBUG)
 #define VERSION_CONFIG   ""
@@ -41,12 +41,12 @@
 
 /*! A string containing the current full version number.
  */
-const char* wm_version = VERSION;
+const char* wm_version = "WebPageLayout v" VERSION;
 
 /*! A string containing a long hand version name and copyright message.
  */
-const char* wm_title = "WebPageLayout - V" VERSION "\n"
-                      "Copyright (c) 2017..2021 Nick Matthews\n\n";
+const char* wm_title = "WebPageLayout - v" VERSION "\n"
+                      "Copyright (c) 2017..2022 Nick Matthews\n\n";
 
 /*****************************************************************************
 
@@ -60,7 +60,7 @@ const char* wm_title = "WebPageLayout - V" VERSION "\n"
  21feb18  v0.1.3  Rework the pages using new livery.css style and markup.
  18sep18  v0.2.0  Add standard support files.
   1sep21  v0.2.1  Add "Notes", "Warning", "Tips" and "Code" styles to livery.css.
-  active  v0.2.2
+ 16jul22  v0.2.2  Update livery.css to give a more modern look.
 
 *****************************************************************************/
 

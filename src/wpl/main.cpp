@@ -4,7 +4,7 @@
  * Purpose:     Main program control.
  * Author:      Nick Matthews
  * Created:     3rd Febuary 2017
- * Copyright:   Copyright (c) 2017 ~ 2018, Nick Matthews.
+ * Copyright:   Copyright (c) 2017..2022, Nick Matthews.
  * Licence:     Boost
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -58,7 +58,7 @@ int main( int argc, char* argv[] )
         }
 
         if( vm.count( "version" ) ) {
-            std::cout << " " << wm_version << "\n";
+            std::cout << wm_version << "\n";
             return 0;
         }
 
