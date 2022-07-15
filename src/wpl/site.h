@@ -4,7 +4,7 @@
  * Purpose:     Write website header.
  * Author:      Nick Matthews
  * Created:     18th Febuary 2017
- * Copyright:   Copyright (c) 2017 ~ 2018, Nick Matthews.
+ * Copyright:   Copyright (c) 2017..2022, Nick Matthews.
  * Licence:     Boost
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -47,7 +47,7 @@ struct Page {
     std::string prev;
     std::string next;
 
-    Page() : menu(false), level(0), parent(nullptr) {}
+    Page() : map_label(true), menu(false), level(0), parent(nullptr) {}
 };
 
 struct Site {
@@ -66,6 +66,8 @@ struct Site {
     std::string color_top;
     std::string color_border;
     bool        logo_shadow;
+
+    Site() : logo_shadow( true ) {}
 };
 
 const int g_crumb_step_level = 4;
