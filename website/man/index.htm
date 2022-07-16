@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en'>
 <head>
- <title>WebPageLayout - V0.1.3 Manual</title>
+ <title>WebPageLayout - Manual</title>
  <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
  <link rel='icon' type='image/png' href='../sys/logo32x32.png' />
  <link rel='stylesheet' type='text/css' href='../sys/livery.css' />
@@ -14,18 +14,22 @@
     <img class='logo' src='../sys/logo266x100.png' alt='Logo' />
    </a>
   </div>
-  WebPageLayout - V0.1.3 Manual<br />Introduction
+  WebPageLayout - V0.2.2 Manual<br />Introduction
   <div class='clear'></div>
  </div>
 
  <div class="crumbs">
   <a href='../index.htm' class='m-item'>Home</a>
-  <a href='index.htm' class='m-item thispage'>V0.1.3 Manual</a>
-  <a href='../dev/index.htm' class='m-item nav'>►</a>
+  <a href='index.htm' class='m-item thispage'>Manual</a>
+  <a href='../man/files.htm' class='m-item nav'>►</a>
   <a href='../new/news.htm' class='m-item nav'>◄</a>
  </div>
 
  <div class='menu'>
+  <a href='../man/files.htm' class='m-item'>Standard Files</a>
+  <a href='../man/layout.htm' class='m-item'>Layout File</a>
+  <a href='../man/annotate.htm' class='m-item'>Annotation</a>
+  <a href='../man/gloss.htm' class='m-item'>Glossary</a>
   <a href='../map.htm' class='m-item'>Site Map</a>
   <div class='menu-plus'>
    Code repository at<br />
@@ -37,14 +41,113 @@
 
 <div id='content'>
 
-<h2>Page Under Construction</h2>
+<h2>Purpose of Program</h2>
+<p>
+ This intention of this program is to create and maintain a set of related websites
+ with a common look and feel.
+ Only the framework of the web pages are maintained,
+ namely, the header, footer and the navigation menus.
+ The contents of each page is copied from a master site.
+</p>
+<p>
+ The program may be used in the following ways:-
+</p>
+<ol>
+ <li>Create a new website.</li>
+ <li>Make a change to the common framework for all pages of a website.</li>
+ <li>Add a new page or pages to a website.</li>
+ <li>Move and/or delete pages from a website.</li>
+</ol>
+<h2>Intended Usage</h2>
+<p>
+ A typical working set up consists of up to 4 directories,
+ each placed in the root directory of the subject project.
+ These are (using their conventional names):-
+</p>
+<ul>
+ <li><b>website</b> - Directory holding the resulting working website pages.</li>
+ <li><b>webutil</b> - Holds the <b>layout.json</b> file and various scripts (Windows batch files).</li>
+ <li><b>web-new</b> - Target directory when making changes to the layout.</li>
+ <li><b>webmod</b> - Alternative copy of the source website, where files can be moved and deleted.</li>
+</ul>
+<p>
+ The <a href='layout.htm'><b>webutil/layout.json</b></a> file is a full description of website in JSON format.
+ A <b>webutil/statistics.txt</b> file is used,
+ if you want to insert a statistics script into each page.
+</p>
+<p>
+ The following descriptions are based on a Windows operating system.
+ The WebPageLayout program is named "wpl.exe"
+ and is available on the system path.
+ The batch files included with this project (or their Unix equivalent) should be available.
+</p>
+
+<h3>Creating a new website</h3>
+<p>
+ Create the following files:-
+</p>
+<ol>
+ <li><b>webutil/layout.json</b> - A minimum <a href='layout.htm'>layout file</a>.</li>
+ <li><b>webutil/statistics.txt</b> - A script inserted into every page to aid web statistics (optional).
+ <li><b>website/sys/logo266x100.png</b> - A 266 x 100 pixel logo displayed on all web pages' heading.</li>
+ <li><b>website/sys/logo32x32.png</b> - A 32 x 32 pixel logo used as a favicon.</li>
+ <li><b>website/sys/bullet_hov.png</b> - A 16 x 16 pixel bullet point hi-lighting the navigation button under the cursor.</li>
+ <li><b>website/sys/bullet_cur.png</b> - A 16 x 16 pixel bullet point for "current page" navigation button.</li>
+</ol>
+<p>
+ Run the <b>webutil/make-from-website.bat</b> batch file.
+ This should produce a new <b>web-new</b> directory containing a functional,
+ if content-less, website.
+ One you are satisfied the new website is working how you want,
+ delete (or rename) the <b>website</b> directory
+ and rename the <b>web-new</b> to <b>website</b>.
+</p>
+<p>
+ Add content to the web pages by directly editing the <b>website/*.htm</b> files.
+ Only make changes between the lines marked<br />
+ &lt;div id='content'&gt;<br />
+ and<br />
+ &lt;/div&gt;&lt;!--id=content--&gt;
+</p>
+<p>
+ Note, you will need to manually update git when creating or removing website files.
+</p>
+
+<h3>Change Framework or Create New Pages</h3>
+<p>
+ Edit the <b>webutil/layout.json</b> file to to make changes to the framework and/or add pages.
+ Run the <b>webutil/make-from-website.bat</b> batch file to create the <b>web-new</b> directory.
+ As before, once satisfied all is OK, 
+ delete (or rename) the <b>website</b> directory
+ and rename <b>web-new</b> to <b>website</b>.
+</p>
+<p>
+ Update the web pages content directly in the <b>website</b> directory.
+</p>
+
+<h3>Move and/or Delete Pages from a Website</h3>
+<p>
+ Copy the <b>website</b> directory to <b>webmod</b>
+ and use this to rearrange site by moving, adding and deleting files.
+ The <b>webutil/layout.json</b> is edited (after making a backup) to reflect the new site.
+ Run the <b>webutil/make-from-webmod.bat</b> batch file.
+ Repeat the process until you are satisfied the site is as required.
+</p>
+<p>
+ Backup the <b>website</b> directory and then ensure the any deleted or moved files
+ are updated with git.
+ Rename <b>web-new</b> to <b>website</b> and again ensure git is maintained.
+</p>
+<p>
+ Update the web pages content directly in the <b>website</b> directory.
+</p>
 
 </div><!--id=content-->
 
  <div class="crumbs">
   <a href='../index.htm' class='m-item'>Home</a>
-  <a href='index.htm' class='m-item thispage'>V0.1.3 Manual</a>
-  <a href='../dev/index.htm' class='m-item nav'>►</a>
+  <a href='index.htm' class='m-item thispage'>Manual</a>
+  <a href='../man/files.htm' class='m-item nav'>►</a>
   <a href='../new/news.htm' class='m-item nav'>◄</a>
  </div>
 
