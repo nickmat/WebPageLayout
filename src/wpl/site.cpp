@@ -4,7 +4,7 @@
  * Purpose:     Write website.
  * Author:      Nick Matthews
  * Created:     18th Febuary 2017
- * Copyright:   Copyright (c) 2017 ~ 2018, Nick Matthews.
+ * Copyright:   Copyright (c) 2017..2022, Nick Matthews.
  * Licence:     Boost
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -51,7 +51,7 @@ void create_form(const Site& site, Form& form)
         site_css = " <link rel='stylesheet' type='text/css' href='#depth#" + site.site_css + "' />\n";
     }
 	form.head =
-		"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>\n"
+		"<!DOCTYPE html>\n"
 		"<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en'>\n"
 		"<head>\n"
 		" <title>" + site.project + " - #title#</title>\n"
@@ -121,8 +121,8 @@ void create_form(const Site& site, Form& form)
         "\n"
         " <div id='valid'>\n"
         "  <p>\n"
-        "   <a href='http://validator.w3.org/check?uri=referer'>\n"
-        "    <img src='#depth#sys/valid-xhtml10.png' alt='Valid XHTML 1.0 Strict' height='31' width='88' />\n"
+        "   <a href='https://www.gueury.com/mozilla/'>\n"
+        "    <img src='#depth#sys/tidy_32.gif' alt='Validated by HTML Validator (based on Tidy)' height='32' width='78' />\n"
         "   </a>\n"
         "  </p>\n"
         " </div>\n\n"
@@ -364,8 +364,8 @@ void write_sys_files( Site& site )
         write_binary_file( filename, g_download_button_png, g_sizeof_download_button_png );
         std::cout << filename << "\n";
     }
-    filename = path + "/valid-xhtml10.png";
-    write_binary_file( filename, g_valid_xhtml10_png, g_sizeof_valid_xhtml10_png );
+    filename = path + "/tidy_32.gif";
+    write_binary_file( filename, g_tidy_32_gif, g_sizeof_tidy_32_gif );
     std::cout << filename << "\n";
 }
 

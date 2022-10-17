@@ -26,7 +26,7 @@
 #include "version.h"
 
 
-#define VERSION_STATUS "" /* " test" */
+#define VERSION_STATUS /* "" */ " test"
 
 #if defined(NDEBUG) || !defined(_DEBUG)
 #define VERSION_CONFIG   ""
@@ -34,7 +34,7 @@
 #define VERSION_CONFIG   " debug"
 #endif
 
-#define VERSION_NUM   "0.2.2"
+#define VERSION_NUM   "0.2.3"
 
 
 #define VERSION   VERSION_NUM VERSION_STATUS VERSION_CONFIG
@@ -61,6 +61,7 @@ const char* wm_title = "WebPageLayout - v" VERSION "\n"
  18sep18  v0.2.0  Add standard support files.
   1sep21  v0.2.1  Add "Notes", "Warning", "Tips" and "Code" styles to livery.css.
  16jul22  v0.2.2  Update livery.css to give a more modern look.
+  active  v0.2.3  Change DOCTYPE to html (html5). Change W3C xhtml 1.0 footnote.
 
 *****************************************************************************/
 

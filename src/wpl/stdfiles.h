@@ -4,7 +4,7 @@
  * Purpose:     Standard web files data header.
  * Author:      Nick Matthews
  * Created:     13th July 2018
- * Copyright:   Copyright (c) 2018, Nick Matthews.
+ * Copyright:   Copyright (c) 2018..2022, Nick Matthews.
  * Licence:     Boost
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -45,7 +45,7 @@ extern size_t g_sizeof_github_logo_png;
 extern const unsigned char g_download_button_png[];
 extern size_t g_sizeof_download_button_png;
 
-extern const unsigned char g_valid_xhtml10_png[];
-extern size_t g_sizeof_valid_xhtml10_png;
+extern const unsigned char g_tidy_32_gif[];
+extern size_t g_sizeof_tidy_32_gif;
 
 #endif // SRC_WPL_STDFILES_H_GUARD

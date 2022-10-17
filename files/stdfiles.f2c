@@ -4,7 +4,7 @@
  * Purpose:     file2cpp template file for standard website files.
  * Author:      Nick Matthews
  * Created:     12th July 2018
- * Copyright:   Copyright (c) 2018, Nick Matthews.
+ * Copyright:   Copyright (c) 2018..2022, Nick Matthews.
  * Licence:     Boost
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -43,7 +43,7 @@ size_t g_sizeof_github_logo_png = sizeof(g_github_logo_png);
 const unsigned char g_download_button_png[] = @{download-button.png};
 size_t g_sizeof_download_button_png = sizeof(g_download_button_png);
 
-const unsigned char g_valid_xhtml10_png[] = @{valid-xhtml10.png};
-size_t g_sizeof_valid_xhtml10_png = sizeof(g_valid_xhtml10_png);
+const unsigned char g_tidy_32_gif[] = @{tidy_32.gif};
+size_t g_sizeof_tidy_32_gif = sizeof(g_tidy_32_gif);
 
 // End of files/stdfiles.f2c file
