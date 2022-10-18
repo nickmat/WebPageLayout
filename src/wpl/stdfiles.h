@@ -45,6 +45,9 @@ extern size_t g_sizeof_github_logo_png;
 extern const unsigned char g_download_button_png[];
 extern size_t g_sizeof_download_button_png;
 
+extern const unsigned char g_wpl_32_png[];
+extern size_t g_sizeof_wpl_32_png;
+
 extern const unsigned char g_tidy_32_gif[];
 extern size_t g_sizeof_tidy_32_gif;
 

@@ -121,9 +121,12 @@ void create_form(const Site& site, Form& form)
         "\n"
         " <div id='valid'>\n"
         "  <p>\n"
-        "   <a href='https://www.gueury.com/mozilla/'>\n"
-        "    <img src='#depth#sys/tidy_32.gif' alt='Validated by HTML Validator (based on Tidy)' height='32' width='78' />\n"
-        "   </a>\n"
+        "   <a href='https://nickmat.github.io/WebPageLayout/website/index.htm'>"
+        "<img src='#depth#sys/wpl_32.png' alt='Managed by WebPageLayout' height='32' width='32' />"
+        "</a>\n"
+        "   <a href='https://www.gueury.com/mozilla/'>"
+        "<img src='#depth#sys/tidy_32.gif' alt='Validated by HTML Validator (based on Tidy)' height='32' width='78' />"
+        "</a>\n"
         "  </p>\n"
         " </div>\n\n"
         " <div id='create-date'>#create-date#</div>\n"
@@ -284,7 +287,7 @@ void write_page(Page& page, Form& form, const Site& site)
         menu = replace_text_all(form.menu, "#depth#", page.depth);
         menu = replace_text(menu, "#side-menu#", menu_items);
     }
-    string tail = replace_text(form.tail, "#depth#", page.depth);
+    string tail = replace_text_all( form.tail, "#depth#", page.depth );
     tail = replace_text( tail, "#crumbs#", crumb );
     file <<
         head << menu <<
@@ -364,6 +367,9 @@ void write_sys_files( Site& site )
         write_binary_file( filename, g_download_button_png, g_sizeof_download_button_png );
         std::cout << filename << "\n";
     }
+    filename = path + "/wpl_32.png";
+    write_binary_file( filename, g_wpl_32_png, g_sizeof_wpl_32_png );
+    std::cout << filename << "\n";
     filename = path + "/tidy_32.gif";
     write_binary_file( filename, g_tidy_32_gif, g_sizeof_tidy_32_gif );
     std::cout << filename << "\n";

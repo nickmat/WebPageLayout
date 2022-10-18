@@ -43,6 +43,9 @@ size_t g_sizeof_github_logo_png = sizeof(g_github_logo_png);
 const unsigned char g_download_button_png[] = @{download-button.png};
 size_t g_sizeof_download_button_png = sizeof(g_download_button_png);
 
+const unsigned char g_wpl_32_png[] = @{wpl_32.png};
+size_t g_sizeof_wpl_32_png = sizeof(g_wpl_32_png);
+
 const unsigned char g_tidy_32_gif[] = @{tidy_32.gif};
 size_t g_sizeof_tidy_32_gif = sizeof(g_tidy_32_gif);
 
