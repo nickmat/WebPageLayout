@@ -297,6 +297,7 @@ void write_page(Page& page, Form& form, const Site& site)
         file << "<h2>Site Map</h2>\n\n<table class='map'>\n";
         output_map_line(file, site.website);
         file << "</table>\n\n";
+        file << "<p>\n Site managed using <a href='https://github.com/nickmat/WebPageLayout'>WebPageLayout</a> program.\n</p>\n\n";
         tail = replace_text(tail, "#create-date#", todays_date());
     }
     else {
