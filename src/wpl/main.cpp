@@ -63,15 +63,15 @@ int main( int argc, char* argv[] )
         }
 
         if ( source.empty() ) {
-            std::cerr << "Source folder not given.\n";
+            std::cerr << "Source folder not given.\n\n" << desc;
             return 1;
         }
         if ( target.empty() ) {
-            std::cerr << "Target folder not given.\n";
+            std::cerr << "Target folder not given.\n\n" << desc;
             return 1;
         }
         if ( layout.empty() ) {
-            std::cerr << "Layout file not given.\n";
+            std::cerr << "Layout file not given.\n\n" << desc;
             return 1;
         }
         process_layout_file( layout, source, target );
