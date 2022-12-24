@@ -28,7 +28,111 @@
 
 <div id='content' class='nomenu'>
 
-<h2>Page Under Construction</h2>
+<h2>Introduction</h2>
+
+<p>
+ All html files should have their content written in a &lt;div id='content'&gt; block.
+ The block tag may also include a class='nomenu' attribute (after the id attribute).
+ All the markup outside of this block is the responsibility of the <b>wpl</b> program.
+ It is created by reading in the layout file.
+</p>
+<p>
+ It is important to keep the actual files (which hold the content)
+ in step with the layout file.
+ If the layout file includes an entry for a missing page then one will be created.
+ But if a page exists that is not in the layout file,
+ it will not be removed or linked to.
+</p>
+<p>
+ The layout file is a standard JSON formatted file containing a Project Object.
+ The current convention is to name the file <b>layout.json</b>
+ and place it in the <b>webutil</b> directory.
+</p>
+<p>
+ When running the <b>wpl</b> program,
+ the layout file must be named on the command line with the --layout switch.
+</p>
+
+<h2>JSON File Attributes</h2>
+
+<p>
+ A website consists of html pages. These pages can be one of two types:
+ a start-of-section page and a content page.
+</p>
+<p>
+ The start-of-section page normally contains a menu linking all the content pages.
+ If the section is particularly large or complicated it is possible create
+ the links to within the page text and suppress the built-in menu.
+</p>
+<p>
+ The contents of a section consist of a start-of-section page
+ and of zero or more content pages or other start-of-section pages.
+</p>
+
+<h3>Project Object</h3>
+<p>
+ The file contains the following Project Object. Unless otherwise stated, the elements types are strings.
+</p>
+<dl>
+ <dt><b>"project":</b></dt><dd>Name of the project. It appears at the beginning of each page title.</dd>
+ <dt><b>"home-url":</b></dt><dd>
+  An absolute URL to the projects home webpage.
+  It is used to create a link when the title icon is clicked.
+ </dd>
+ <dt><b>"color-top":</b></dt><dd>Colour of the title bar background.</dd>
+ <dt><b>"color-border":</b></dt><dd>Colour of the dark border accents.</dd>
+ <dt><b>"logo-shadow":</b> Boolean</dt><dd>
+  If <b>true</b> (the default) put a shadow under the main title logo.
+  If not required, set to <b>false</b>.
+ </dd>
+ <dt><b>"site-css":</b></dt><dd>If used, a css file of this name is added to every page.</dd>
+ <dt><b>"sourceforge-url":</b></dt><dd>If included, add a link option on every section menu.</dd>
+ <dt><b>"github-url":</b></dt><dd>If included, add a link option on every section menu.</dd>
+ <dt><b>"download-url":</b></dt><dd>If included, add a link option on every section menu.</dd>
+ <dt><b>"stats-text":</b></dt><dd>
+  If included, points to a text file whose contents is included at the bottom of each page.
+ </dd>
+ <dt><b>"site":</b> Page Object</dt><dd>
+  Description of the home page.
+  Note this also contains the contents of the complete website tree.
+ </dd>
+</dl>
+<h3>Page Object</h3>
+<p>
+ The Page Object describes a page.
+ If the page is the start of a new section
+ then it may also contain an array of additional pages in that section.
+ The Page Object has the following properties:-
+</p>
+<dl>
+ <dt><b>"folder":</b></dt><dd>
+  Used in the first of page of a section.
+  The directory this and the sections pages are placed.
+ </dd>
+ <dt><b>"name":</b></dt><dd>
+  The file name of the page, without the extension (.htm).
+  If not given and is the start of a section, the name "index" is used.
+  If not given otherwise, the object will be added to the section's menu
+  but a page is not created.
+ </dd>
+ <dt><b>"label":</b></dt><dd>
+  The label used on the menu and breadcrumbs. Use <b>"name"</b> value if not given.
+ </dd>
+ <dt><b>"title":</b></dt><dd>
+  The page title which follows the project name.
+  Same as the previous page if not given.
+ </dd>
+ <dt><b>"subtitle":</b></dt><dd>The second line in the title block.</dd>
+ <dt><b>"menu":</b> Boolean</dt><dd>
+  If start of section and <b>true</b> (the default), add the section menu to the page.
+ </dd>
+ <dt><b>"map-label":</b> Boolean</dt><dd>
+  If <b>true</b> (the default) use the <b>"label"</b> string as the page description in the site map.
+  Otherwise, use the <b>subtitle</b> string.
+ </dd>
+ <dt><b>"css":</b></dt><dd>If used, the file name of css file to be used for this page only.</dd>
+ <dt><b>"content":</b> Array of Page Objects</dt><dd>A list of other pages in the section.</dd>
+</dl>
 
 </div><!--id=content-->
 
