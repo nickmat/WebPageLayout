@@ -1,41 +1,41 @@
 {
-	"project": "WebPageLayout",
-	"home-url": "https://nickmat.github.io/WebPageLayout/website/index.htm",
-	"color-top": "WhiteSmoke",
-	"color-border": "SlateGray",
-	"github-url": "https://github.com/nickmat/WebPageLayout",
-	"site": { "folder": "web-new", "subtitle": "Home Page", "label": "Home", "content": [
-		{ "folder": "new", "name": "news", "label": "News" },
-		{ "folder": "man", "label": "Manual", "title": "V0.2.2 Manual", "subtitle": "Introduction", "content": [
-			{ "name": "files", "label": "Standard Files" },
-			{ "name": "layout", "label": "Layout File" },
-			{ "name": "annotate", "label": "Annotation" },
-			{ "name": "gloss", "label": "Glossary" }
-		]},
-		{ "folder": "dev", "label": "Development", "title": "Development", "subtitle": "Introduction", "content": [
-		    { "folder": "man", "label": "V0.2.2 Manual", "title": "V0.2.2 Manual", "subtitle": "Introduction", "content": [
-				{ "name": "files", "label": "Standard Files" },
-				{ "name": "layout", "label": "Layout File" },
-				{ "name": "annotate", "label": "Annotation" },
-				{ "name": "gloss", "label": "Glossary" }
-		    ]},
-		    { "name": "routemap", "label": "Route Map", "title": "Development" }
-		]},
-		{ "name": "support", "label": "Support", "title": "" },
-		{ "folder": "test", "label": "Test Levels", "title": "Test", "content": [
-		    { "folder": "l2", "label": "Level 2", "content": [
-				{ "folder": "l3", "label": "Level 3", "content": [
-				    { "folder": "l4", "label": "Level 4", "content": [
-						{ "folder": "l5", "label": "Level 5", "content": [
-						    { "folder": "l6", "label": "Level 6", "content": [
-								{ "folder": "l7", "label": "Level 7", "content": [
-								    { "name": "p8", "label": "Page 8" }
-								]}
-						    ]}
-						]}
-				    ]}
-				]}
-		    ]}
-		]}
-	]}
+    "project": "WebPageLayout",
+    "home-url": "https://nickmat.github.io/WebPageLayout/website/index.htm",
+    "color-top": "WhiteSmoke",
+    "color-border": "SlateGray",
+    "github-url": "https://github.com/nickmat/WebPageLayout",
+    "site": { "folder": ".", "subtitle": "Home Page", "label": "Home", "content": [
+        { "folder": "new", "name": "news", "label": "News" },
+        { "folder": "man", "label": "Manual", "title": "V0.2.2 Manual", "subtitle": "Introduction", "content": [
+            { "name": "files", "label": "Standard Files" },
+            { "name": "layout", "label": "Layout File" },
+            { "name": "annotate", "label": "Annotation" },
+            { "name": "gloss", "label": "Glossary" }
+        ]},
+        { "folder": "dev", "label": "Development", "title": "Development", "subtitle": "Introduction", "content": [
+            { "folder": "man", "label": "V0.2.2 Manual", "title": "V0.2.2 Manual", "subtitle": "Introduction", "content": [
+                { "name": "files", "label": "Standard Files" },
+                { "name": "layout", "label": "Layout File" },
+                { "name": "annotate", "label": "Annotation" },
+                { "name": "gloss", "label": "Glossary" }
+            ]},
+            { "name": "routemap", "label": "Route Map", "title": "Development" }
+        ]},
+        { "name": "support", "label": "Support", "title": "" },
+        { "folder": "test", "label": "Test Levels", "title": "Test", "content": [
+            { "folder": "l2", "label": "Level 2", "content": [
+                { "folder": "l3", "label": "Level 3", "content": [
+                    { "folder": "l4", "label": "Level 4", "content": [
+                        { "folder": "l5", "label": "Level 5", "content": [
+                            { "folder": "l6", "label": "Level 6", "content": [
+                                { "folder": "l7", "label": "Level 7", "content": [
+                                    { "name": "p8", "label": "Page 8" }
+                                ]}
+                            ]}
+                        ]}
+                    ]}
+                ]}
+            ]}
+        ]}
+    ]}
 }
