@@ -252,6 +252,7 @@ void write_page(Page& page, Form& form, const Site& site)
         write_page(*p, form, site);
     }
     fs::path path = site.target + "/" + site.website.folder + "/" + page.filename;
+    path = path.lexically_normal();
     fs::create_directories(path.parent_path());
 	fs::ofstream file{path};
     std::cout << path.string() << "\n";
@@ -326,7 +327,8 @@ void write_binary_file( const fs::path& path, const unsigned char* data, size_t 
 
 void write_sys_files( Site& site )
 {
-    string path = site.target + "/" + site.website.folder + "/sys";
+    fs::path path = site.target + "/" + site.website.folder + "/sys";
+    path = path.lexically_normal();
     fs::create_directories( path );
     string livery = replace_text_all( g_livery_css, "#color-top#", site.color_top );
     livery = replace_text_all( livery, "#col-border#", site.color_border );
@@ -335,14 +337,14 @@ void write_sys_files( Site& site )
         heading_logo = "box-shadow: none;";
     }
     livery = replace_text_all( livery, "#heading-logo#", heading_logo );
-    string filename = path + "/livery.css";
+    fs::path filename = path / "livery.css";
     write_text_file( filename, livery.c_str() );
     std::cout << filename << "\n";
     for ( auto css_filename : site.optional_css ) {
         bool found = false;
         for ( size_t i = 0; i < g_sizeof_optional_css; i++ ) {
             if ( css_filename == string( g_optional_css[i].filename ) ) {
-                filename = path + "/" + css_filename + ".css";
+                filename = path / ( css_filename + ".css" );
                 write_text_file( filename, g_optional_css[i].css );
                 std::cout << filename << "\n";
                 found = true;
@@ -354,24 +356,24 @@ void write_sys_files( Site& site )
         }
     }
     if ( !site.sourceforge_url.empty() ) {
-        filename = path + "/sf-logo-13.png";
+        filename = path / "sf-logo-13.png";
         write_binary_file( filename, g_sf_logo_13_png, g_sizeof_sf_logo_13_png );
         std::cout << filename << "\n";
     }
     if ( !site.github_url.empty() ) {
-        filename = path + "/github_logo.png";
+        filename = path / "github_logo.png";
         write_binary_file( filename, g_github_logo_png, g_sizeof_github_logo_png );
         std::cout << filename << "\n";
     }
     if ( !site.download_url.empty() ) {
-        filename = path + "/download-button.png";
+        filename = path / "download-button.png";
         write_binary_file( filename, g_download_button_png, g_sizeof_download_button_png );
         std::cout << filename << "\n";
     }
-    filename = path + "/wpl_32.png";
+    filename = path / "wpl_32.png";
     write_binary_file( filename, g_wpl_32_png, g_sizeof_wpl_32_png );
     std::cout << filename << "\n";
-    filename = path + "/tidy_32.gif";
+    filename = path / "tidy_32.gif";
     write_binary_file( filename, g_tidy_32_gif, g_sizeof_tidy_32_gif );
     std::cout << filename << "\n";
 }
