@@ -3,8 +3,8 @@
  * Project:     WebPageLayout: Command line program to create Website.
  * Purpose:     Process layout functions header.
  * Author:      Nick Matthews
- * Created:     4th Febuary 2017
- * Copyright:   Copyright (c) 2017 ~ 2018, Nick Matthews.
+ * Created:     4th February 2017
+ * Copyright:   Copyright (c) 2017..2022, Nick Matthews.
  * Licence:     Boost
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -28,6 +28,8 @@
 
 #include <string>
 
-void process_layout_file( const std::string& filename, const std::string& source, const std::string& target );
+void process_layout_file(
+    const std::string& filename, const std::string& source,
+    const std::string& target, const std::string& blog_src );
 
 #endif // SRC_WPL_LAYOUT_H_GUARD

@@ -38,12 +38,13 @@ using std::string;
 int main( int argc, char* argv[] )
 {
     try {
-        string source, target, layout;
+        string source, blog_src, target, layout;
         po::options_description desc( string(wm_title) + "Allowed options" );
         desc.add_options()
             ("help,h", "produce help message")
             ("version,v", "state version number")
-            ("source", po::value(&source), "path to web pages containing text")
+            ("source", po::value( &source ), "path to web pages containing text")
+            ("blog", po::value( &blog_src ), "path to markdown blog pages")
             ("target", po::value(&target), "path to web pages to be rewritten")
             ("layout", po::value(&layout), "layout file")
         ;
@@ -74,7 +75,7 @@ int main( int argc, char* argv[] )
             std::cerr << "Layout file not given.\n\n" << desc;
             return 1;
         }
-        process_layout_file( layout, source, target );
+        process_layout_file( layout, source, target, blog_src );
 
     } catch( std::exception& e ) {
         std::cerr << "error: " << e.what() << "\n";
