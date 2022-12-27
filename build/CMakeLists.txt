@@ -12,6 +12,7 @@ include_directories(${Boost_INCLUDE_DIRS})
 
 # The wpl command line program
 set(WM_HEADERS
+  ../../src/wpl/blog.h
   ../../src/wpl/content.h
   ../../src/wpl/layout.h
   ../../src/wpl/site.h
@@ -19,6 +20,7 @@ set(WM_HEADERS
   ../../src/wpl/version.h
 )
 set(WM_SOURCES
+  ../../src/wpl/blog.cpp
   ../../src/wpl/content.cpp
   ../../src/wpl/layout.cpp
   ../../src/wpl/main.cpp

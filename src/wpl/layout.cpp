@@ -25,6 +25,7 @@
 
 #include "layout.h"
 
+#include "blog.h"
 #include "site.h"
 
 #include <boost/filesystem.hpp>
@@ -151,6 +152,10 @@ void process_layout_file(
 
     Site site;
     site.layout_dir = layout_fn.parent_path().string();
+
+    if( !blog_src.empty() ) {
+        process_blog( site.layout_dir, blog_src );
+    }
 
     pt::ptree root;
     pt::read_json( layout_fn.string(), root );
