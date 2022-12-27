@@ -70,7 +70,21 @@ void read_page(
     Page& page, pt::ptree& tree, const string& depth, const string& path,
     Page* parent, Site& site )
 {
-	page.folder = tree.get<string>("folder", "");
+    string insert = tree.get<string>( "insert", "" );
+    if( !insert.empty() ) {
+        std::cout << "insert file: " << insert << "\n";
+        fs::path json_path( insert );
+        if( json_path.is_relative() ) {
+            json_path = site.layout_dir / json_path;
+        }
+
+        pt::ptree iroot;
+        pt::read_json( json_path.string(), iroot );
+        read_page( page, iroot, depth, path, parent, site );
+        return;
+    }
+
+    page.folder = tree.get<string>("folder", "");
 	page.name = tree.get<string>("name", "");
     if ( page.name.empty() && !page.folder.empty() ) {
         page.name = "index";
