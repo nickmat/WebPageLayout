@@ -6,14 +6,15 @@
     "github-url": "https://github.com/nickmat/WebPageLayout",
     "site": { "folder": ".", "subtitle": "Home Page", "label": "Home", "content": [
         { "folder": "new", "name": "news", "label": "News" },
-        { "folder": "man", "label": "Manual", "title": "V0.2.2 Manual", "subtitle": "Introduction", "content": [
+        { "insert": "markdown.json" },
+        { "folder": "man", "label": "Manual", "title": "V0.2.3 Manual", "subtitle": "Introduction", "content": [
             { "name": "files", "label": "Standard Files" },
             { "name": "layout", "label": "Layout File" },
             { "name": "annotate", "label": "Annotation" },
             { "name": "gloss", "label": "Glossary" }
         ]},
         { "folder": "dev", "label": "Development", "title": "Development", "subtitle": "Introduction", "content": [
-            { "folder": "man", "label": "V0.2.2 Manual", "title": "V0.2.2 Manual", "subtitle": "Introduction", "content": [
+            { "folder": "man", "label": "V0.3.0 Manual", "title": "V0.3.0 Manual", "subtitle": "Introduction", "content": [
                 { "name": "files", "label": "Standard Files" },
                 { "name": "layout", "label": "Layout File" },
                 { "name": "annotate", "label": "Annotation" },
