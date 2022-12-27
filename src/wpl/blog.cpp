@@ -52,8 +52,9 @@ namespace {
 
                 out << 
                     "{\n \"folder\": " << path.filename() <<
-                    ", \"label\": " << path.filename()
-                    ;
+                    ", \"label\": " << path.filename() <<
+                    ", \"title\": \"Blogs\", \"subtitle\": \"Contents\" "
+                ;
                 write_blog_layout( out, path.string(), 0 );
                 out << "\n}\n";
             }
@@ -63,10 +64,17 @@ namespace {
                 std::cout << path.stem() << " [stem]\n";
                 std::cout << path.extension() << " [ext]\n";
 
+                string fn = path.stem().string();
+                assert( fn.length() > 4 );
+                string label = fn.substr( 4 );
+
                 if( level != 0 ) {
                     out << ",\n";
                 }
-                out << "  { \"name\": " << path.stem() << " }";
+                out <<
+                    "  { \"name\": " << path.stem() << 
+                    ", \"label\": \"" << label << "\" }"
+                    ;
                 level++;
             }
         }
