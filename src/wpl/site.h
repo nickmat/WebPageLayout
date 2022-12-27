@@ -3,7 +3,7 @@
  * Project:     WebPageLayout: Command line program to create Website.
  * Purpose:     Write website header.
  * Author:      Nick Matthews
- * Created:     18th Febuary 2017
+ * Created:     18th February 2017
  * Copyright:   Copyright (c) 2017..2022, Nick Matthews.
  * Licence:     Boost
  *
@@ -54,6 +54,7 @@ struct Site {
     std::string project;
     std::string source;
     std::string target;
+    std::string layout_dir;
 	Page        website;
     Page        sitemap;
     std::string sourceforge_url;

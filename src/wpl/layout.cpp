@@ -143,15 +143,17 @@ void process_layout_file(
     const string& filename, const string& source, const string& target, const string& blog_src )
 {
     std::cout << "Layout file is: \"" << filename << "\"\n";
-    fs::path fn_path( filename );
-    if ( fn_path.is_relative() ) {
-        fn_path = fs::current_path() / fn_path;
+    fs::path layout_fn( filename );
+    if( layout_fn.is_relative() ) {
+        layout_fn = fs::current_path() / layout_fn;
     }
-    std::cout << fn_path.string() << "\n";
+    std::cout << layout_fn.string() << "\n";
+
+    Site site;
+    site.layout_dir = layout_fn.parent_path().string();
 
     pt::ptree root;
-    pt::read_json( fn_path.string(), root );
-    Site site;
+    pt::read_json( layout_fn.string(), root );
 
     fs::path s_path( source );
     if ( s_path.is_relative() ) {
