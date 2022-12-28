@@ -29,4 +29,5 @@ set(WM_SOURCES
   ../../src/wpl/version.cpp
 )
 add_executable(wpl ${WM_SOURCES} ${WM_HEADERS})
+target_include_directories(wpl PUBLIC ../include)
 target_link_libraries(wpl ${Boost_LIBRARIES})
