@@ -34,7 +34,8 @@ struct Content {
 };
 
 std::string todays_date();
-std::string get_file_contents(const std::string& filename);
-bool get_content(Content& content, const std::string& filename);
+std::string get_file_contents( const std::string& filename );
+void get_content(
+    Content& content, const std::string& filename, const std::string& src_fname );
 
 #endif // SRC_WPL_CONTENT_H_GUARD

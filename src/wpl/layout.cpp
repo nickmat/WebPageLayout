@@ -105,6 +105,7 @@ void read_page(
     if ( !page.css_file.empty() ) {
         site.optional_css.insert( page.css_file );
     }
+    page.markdown = tree.get<bool>( "markdown", false );
     page.parent = parent;
     string cur_path = path;
     if (!page.name.empty()) {
@@ -168,7 +169,12 @@ void process_layout_file(
     site.layout_dir = layout_fn.parent_path().string();
 
     if( !blog_src.empty() ) {
-        process_blog( site.layout_dir, blog_src );
+        fs::path b_path( blog_src );
+        if( b_path.is_relative() ) {
+            b_path = fs::current_path() / b_path;
+        }
+        site.blog_dir = b_path.lexically_normal().string();
+        process_blog( site.layout_dir, site.blog_dir );
     }
 
     pt::ptree root;

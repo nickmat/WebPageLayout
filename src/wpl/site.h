@@ -35,10 +35,11 @@ struct Page {
     std::string name;
     std::string label;
     bool map_label;
-	bool   menu;
+    bool menu;
     std::string title;
     std::string subtitle;
     std::string css_file;
+    bool markdown;
     std::vector<Page*> linked;
     std::string depth;
     int level;
@@ -47,7 +48,8 @@ struct Page {
     std::string prev;
     std::string next;
 
-    Page() : map_label(true), menu(false), level(0), parent(nullptr) {}
+    Page() : map_label(true), menu(false), markdown(false),
+        level(0), parent(nullptr) {}
 };
 
 struct Site {
@@ -55,7 +57,8 @@ struct Site {
     std::string source;
     std::string target;
     std::string layout_dir;
-	Page        website;
+    std::string blog_dir;
+    Page        website;
     Page        sitemap;
     std::string sourceforge_url;
     std::string github_url;

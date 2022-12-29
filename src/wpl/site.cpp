@@ -243,50 +243,50 @@ void output_map_line(fs::ofstream& outfile, const Page& page)
     }
 }
 
-void write_page(Page& page, Form& form, const Site& site)
+void write_page( Page& page, Form& form, const Site& site )
 {
-    if (page.name.empty()) {
+    if( page.name.empty() ) {
         return;
     }
-    for (auto p : page.linked) {
-        write_page(*p, form, site);
+    for( auto p : page.linked ) {
+        write_page( *p, form, site );
     }
     fs::path path = site.target + "/" + site.website.folder + "/" + page.filename;
     path = path.lexically_normal();
-    fs::create_directories(path.parent_path());
-	fs::ofstream file{path};
+    fs::create_directories( path.parent_path() );
+    fs::ofstream file { path };
     std::cout << path.string() << "\n";
     string title = page.title.empty() ? "" : " - " + page.title;
-	string head = replace_text(form.head, "#title#", page.label);
-    head = replace_text(head, "#title-1#", title);
-    head = replace_text(head, "#sub-title#", page.subtitle);
-    head = replace_text_all(head, "#depth#", page.depth);
-    head = replace_text(head, "#css-files#", make_css_link(page));
+    string head = replace_text( form.head, "#title#", page.label );
+    head = replace_text( head, "#title-1#", title );
+    head = replace_text( head, "#sub-title#", page.subtitle );
+    head = replace_text_all( head, "#depth#", page.depth );
+    head = replace_text( head, "#css-files#", make_css_link( page ) );
 
     int step_level = page.level - g_crumb_step_level;
     string crumb = get_prev_crumb( page.parent, page.depth, step_level );
-    crumb += make_crumb(page.name+".htm", page.level, " thispage", page.label);
-    if (page.next.empty()) {
+    crumb += make_crumb( page.name + ".htm", page.level, " thispage", page.label );
+    if( page.next.empty() ) {
         page.next = "map.htm";
         form.map_prev = page.filename;
     }
-    crumb += make_crumb(page.depth + page.next, 0, " nav", "\342\226\272" );
-    if (page.prev.empty()) {
+    crumb += make_crumb( page.depth + page.next, 0, " nav", "\342\226\272" );
+    if( page.prev.empty() ) {
         page.prev = "map.htm";
         form.map_next = page.filename;
     }
-    crumb += make_crumb(page.depth + page.prev, 0, " nav", "\342\227\204" );
+    crumb += make_crumb( page.depth + page.prev, 0, " nav", "\342\227\204" );
     crumb = " <div class=\"crumbs\">\n" + crumb + " </div>\n";
-    head = replace_text(head, "#crumbs#", crumb);
+    head = replace_text( head, "#crumbs#", crumb );
     string menu;
-    if (page.menu) {
+    if( page.menu ) {
         string menu_items;
-        for (auto mpage : page.linked) {
-            menu_items += make_menu_item(mpage, page.depth);
+        for( auto mpage : page.linked ) {
+            menu_items += make_menu_item( mpage, page.depth );
         }
         menu_items += "  <a href='" + page.depth + "map.htm' class='m-item'>Site Map</a>\n";
-        menu = replace_text_all(form.menu, "#depth#", page.depth);
-        menu = replace_text(menu, "#side-menu#", menu_items);
+        menu = replace_text_all( form.menu, "#depth#", page.depth );
+        menu = replace_text( menu, "#side-menu#", menu_items );
     }
     string tail = replace_text_all( form.tail, "#depth#", page.depth );
     tail = replace_text( tail, "#crumbs#", crumb );
@@ -294,18 +294,26 @@ void write_page(Page& page, Form& form, const Site& site)
         head << menu <<
         "<div id='content'" << (menu.empty() ? " class='nomenu'" : "") << ">\n"
         ;
-    if (page.filename == "map.htm") {
+    if( page.filename == "map.htm" ) {
         file << "<h2>Site Map</h2>\n\n<table class='map'>\n";
-        output_map_line(file, site.website);
+        output_map_line( file, site.website );
         file << "</table>\n\n";
         file << "<p>\n Site managed using <a href='https://github.com/nickmat/WebPageLayout'>WebPageLayout</a> program.\n</p>\n\n";
-        tail = replace_text(tail, "#create-date#", todays_date());
+        tail = replace_text( tail, "#create-date#", todays_date() );
     }
     else {
         Content content;
-        get_content(content, site.source + "/" + page.filename);
+        fs::path fname = fs::path( site.source ) / page.filename;
+        string htm_fn = fname.string();
+        string md_fn;
+        if( page.markdown ) {
+            fname = fs::path( site.blog_dir ) / page.filename;
+            fname.replace_extension( ".md" );
+            md_fn = fname.string();
+        }
+        get_content( content, htm_fn, md_fn );
         file << content.text;
-        tail = replace_text(tail, "#create-date#", content.create_date);
+        tail = replace_text( tail, "#create-date#", content.create_date );
 
     }
     file << "</div><!--id=content-->\n\n" << tail;

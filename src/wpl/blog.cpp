@@ -73,7 +73,8 @@ namespace {
                 }
                 out <<
                     "  { \"name\": " << path.stem() << 
-                    ", \"label\": \"" << label << "\" }"
+                    ", \"label\": \"" << label <<
+                    "\", \"markdown\": true }"
                     ;
                 level++;
             }
