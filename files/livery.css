@@ -224,6 +224,7 @@ table.basic td {
 
 table.basic td.code {
     font-family: "Courier New", Courier, monospace;
+    white-space: pre;
 }  
 
 table.basic td.example {
@@ -290,6 +291,12 @@ table.lfloat {
     display: inline-table;
     float: left;
     margin-top: 0;
+}
+
+span.example {
+    background-color: mintcream;
+	font-family: 'Courier New', Courier, monospace;
+	white-space: pre;
 }
 
 img.diag {
