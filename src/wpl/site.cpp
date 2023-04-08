@@ -122,10 +122,10 @@ void create_form(const Site& site, Form& form)
         " <div id='valid'>\n"
         "  <p>\n"
         "   <a href='https://nickmat.github.io/WebPageLayout/website/index.htm'>"
-        "<img src='#depth#sys/wpl_32.png' alt='Managed by WebPageLayout' height='32' width='32' />"
+        "<img src='#depth#sys/wpl_16.png' alt='Managed by WebPageLayout' height='16' width='16' />"
         "</a>\n"
         "   <a href='https://www.gueury.com/mozilla/'>"
-        "<img src='#depth#sys/tidy_32.gif' alt='Validated by HTML Validator (based on Tidy)' height='32' width='78' />"
+        "<img src='#depth#sys/tidy_16.gif' alt='Validated by HTML Validator (based on Tidy)' height='16' width='39' />"
         "</a>\n"
         "  </p>\n"
         " </div>\n\n"
@@ -378,11 +378,11 @@ void write_sys_files( Site& site )
         write_binary_file( filename, g_download_button_png, g_sizeof_download_button_png );
         std::cout << filename << "\n";
     }
-    filename = path / "wpl_32.png";
-    write_binary_file( filename, g_wpl_32_png, g_sizeof_wpl_32_png );
+    filename = path / "wpl_16.png";
+    write_binary_file( filename, g_wpl_16_png, g_sizeof_wpl_16_png );
     std::cout << filename << "\n";
-    filename = path / "tidy_32.gif";
-    write_binary_file( filename, g_tidy_32_gif, g_sizeof_tidy_32_gif );
+    filename = path / "tidy_16.gif";
+    write_binary_file( filename, g_tidy_16_gif, g_sizeof_tidy_16_gif );
     std::cout << filename << "\n";
 }
 

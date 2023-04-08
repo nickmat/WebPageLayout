@@ -45,10 +45,10 @@ extern size_t g_sizeof_github_logo_png;
 extern const unsigned char g_download_button_png[];
 extern size_t g_sizeof_download_button_png;
 
-extern const unsigned char g_wpl_32_png[];
-extern size_t g_sizeof_wpl_32_png;
+extern const unsigned char g_wpl_16_png[];
+extern size_t g_sizeof_wpl_16_png;
 
-extern const unsigned char g_tidy_32_gif[];
-extern size_t g_sizeof_tidy_32_gif;
+extern const unsigned char g_tidy_16_gif[];
+extern size_t g_sizeof_tidy_16_gif;
 
 #endif // SRC_WPL_STDFILES_H_GUARD
