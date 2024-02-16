@@ -4,7 +4,7 @@
  * Purpose:     Read content from existing website.
  * Author:      Nick Matthews
  * Created:     22th Febuary 2017
- * Copyright:   Copyright (c) 2017, Nick Matthews.
+ * Copyright:   Copyright (c) 2017..2024, Nick Matthews.
  * Licence:     Boost
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -87,15 +87,20 @@ namespace {
 
     string convert_markdown( const string& filename )
     {
+        string content = get_file_contents( filename );
+        size_t pos = content.find( "[Content:]" );
+        if( pos != string::npos ) {
+            content = content.substr( pos + 10 );
+        }
+        std::stringstream in( content );
+
         std::shared_ptr<maddy::ParserConfig> config = std::make_shared<maddy::ParserConfig>();
         config->isEmphasizedParserEnabled = true; // default
         config->isHTMLWrappedInParagraph = true; // default
 
         std::shared_ptr<maddy::Parser> parser = std::make_shared<maddy::Parser>( config );
 
-        std::ifstream in( filename );
-
-        return "\n" + parser->Parse(in) + "\n\n";
+        return "\n" + parser->Parse( in ) + "\n\n";
     }
 
 } // anon namespace
