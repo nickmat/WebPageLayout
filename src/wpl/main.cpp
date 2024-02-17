@@ -4,7 +4,7 @@
  * Purpose:     Main program control.
  * Author:      Nick Matthews
  * Created:     3rd Febuary 2017
- * Copyright:   Copyright (c) 2017..2022, Nick Matthews.
+ * Copyright:   Copyright (c) 2017..2024, Nick Matthews.
  * Licence:     Boost
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -38,15 +38,15 @@ using std::string;
 int main( int argc, char* argv[] )
 {
     try {
-        string source, blog_src, target, layout;
+        string source, blog_src, target, layout( "layout.json" );
         po::options_description desc( string(wm_title) + "Allowed options" );
         desc.add_options()
             ("help,h", "produce help message")
             ("version,v", "state version number")
-            ("source", po::value( &source ), "path to web pages containing text")
-            ("blog", po::value( &blog_src ), "path to markdown blog pages")
-            ("target", po::value(&target), "path to web pages to be rewritten")
-            ("layout", po::value(&layout), "layout file")
+            ("source", po::value( &source ), "path to web pages containing text - optional")
+            ("blog", po::value( &blog_src ), "path to markdown blog pages - optional")
+            ("target", po::value(&target), "path to web pages to be rewritten - required")
+            ("layout", po::value(&layout), "layout file - default is layout.json")
         ;
 
         po::variables_map vm;        
@@ -63,17 +63,12 @@ int main( int argc, char* argv[] )
             return 0;
         }
 
-        if ( source.empty() ) {
-            std::cerr << "Source folder not given.\n\n" << desc;
-            return 1;
-        }
         if ( target.empty() ) {
-            std::cerr << "Target folder not given.\n\n" << desc;
+            std::cerr << "Target directory required.\n\n" << desc;
             return 1;
         }
-        if ( layout.empty() ) {
-            std::cerr << "Layout file not given.\n\n" << desc;
-            return 1;
+        if ( source.empty() ) {
+            std::cout << "Source directory not given.\nCreate blank website\n\n";
         }
         process_layout_file( layout, source, target, blog_src );
 
