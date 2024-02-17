@@ -4,7 +4,7 @@
  * Purpose:     Version constants.
  * Author:      Nick Matthews
  * Created:     3rd Febuary 2017
- * Copyright:   Copyright (c) 2017..2022, Nick Matthews.
+ * Copyright:   Copyright (c) 2017..2024, Nick Matthews.
  * Licence:     Boost
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -46,7 +46,7 @@ const char* wm_version = "WebPageLayout v" VERSION;
 /*! A string containing a long hand version name and copyright message.
  */
 const char* wm_title = "WebPageLayout - v" VERSION "\n"
-                      "Copyright (c) 2017..2022 Nick Matthews\n\n";
+                      "Copyright (c) 2017..2024 Nick Matthews\n\n";
 
 /*****************************************************************************
 
