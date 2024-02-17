@@ -21,7 +21,8 @@
                 { "name": "blogs", "label": "Blogs & Markdown " },
                 { "name": "gloss", "label": "Glossary" }
             ]},
-            { "name": "routemap", "label": "Route Map", "title": "Development" }
+            { "name": "routemap", "label": "Route Map", "title": "Development" },
+            { "name": "description", "label": "Description", "subtitle": "Program Description" }
         ]},
         { "name": "support", "label": "Support", "title": "" },
         { "folder": "test", "label": "Test Levels", "title": "Test", "content": [
