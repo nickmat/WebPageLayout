@@ -4,7 +4,7 @@
  * Purpose:     Process blog markdown files.
  * Author:      Nick Matthews
  * Created:     24th December 2022
- * Copyright:   Copyright (c) 2022, Nick Matthews.
+ * Copyright:   Copyright (c) 2022..2024, Nick Matthews.
  * Licence:     Boost
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -25,6 +25,8 @@
 
 #include "blog.h"
 
+#include "content.h"
+
 #include <boost/filesystem.hpp>
 
 #include <iostream>
@@ -37,6 +39,57 @@ using std::string;
 
 namespace {
 
+    struct BlogHdr {
+        string label;
+        string title;
+        string summary;
+    };
+
+    void read_blog_hdr( BlogHdr& hdr, fs::path path )
+    {
+        string filename = path.lexically_normal().string();
+        string text = get_file_contents( filename );
+
+        size_t end = string::npos;
+        size_t pos = text.find( "[Label:]" );
+        if( pos != string::npos ) {
+            pos += 9; // include one space
+            end = text.find( "\n", pos );
+            if( end != string::npos ) {
+                hdr.label = text.substr( pos, end - pos );
+            }
+        }
+
+        end = string::npos;
+        pos = text.find( "[Title:]" );
+        if( pos != string::npos ) {
+            pos += 9; // include one space
+            end = text.find( "\n", pos );
+            if( end != string::npos ) {
+                hdr.title = text.substr( pos, end - pos );
+            }
+        }
+
+        end = string::npos;
+        pos = text.find( "[Summary:]" );
+        if( pos != string::npos ) {
+            pos += 11; // include one space
+            end = text.find( "[Content:]", pos );
+            if( end != string::npos ) {
+                hdr.summary = text.substr( pos, end - pos );
+            }
+        }
+
+        if( hdr.label.empty() ) {
+            string fn = path.stem().string();
+            assert( fn.length() > 4 );
+            hdr.label = fn.substr( 4 );
+        }
+        if( hdr.title.empty() ) {
+            hdr.title = hdr.label;
+        }
+    }
+
     void write_blog_layout( std::ostream& out, const string& blog_src, int level )
     {
         bool start_content = false;
@@ -48,8 +101,6 @@ namespace {
             fs::path path = file.path().lexically_normal();
             std::cout << path << "\n";
             if( fs::is_directory( path ) ) {
-                std::cout << path.filename() << " [dir]\n";
-
                 out << 
                     "{\n \"folder\": " << path.filename() <<
                     ", \"label\": " << path.filename() <<
@@ -59,21 +110,16 @@ namespace {
                 out << "\n}\n";
             }
             else {
-                fs::path name = path.filename();
-                std::cout << name << " [file]\n";
-                std::cout << path.stem() << " [stem]\n";
-                std::cout << path.extension() << " [ext]\n";
-
-                string fn = path.stem().string();
-                assert( fn.length() > 4 );
-                string label = fn.substr( 4 );
+                BlogHdr hdr;
+                read_blog_hdr( hdr, path );
 
                 if( level != 0 ) {
                     out << ",\n";
                 }
                 out <<
                     "  { \"name\": " << path.stem() << 
-                    ", \"label\": \"" << label <<
+                    ", \"label\": \"" << hdr.label <<
+                    "\", \"subtitle\": \"" << hdr.title <<
                     "\", \"markdown\": true }"
                     ;
                 level++;
