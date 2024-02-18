@@ -158,41 +158,30 @@ void read_page(
 void process_layout_file(
     const string& filename, const string& source, const string& target, const string& blog_src )
 {
-    std::cout << "Layout file is: \"" << filename << "\"\n";
-    fs::path layout_fn( filename );
-    if( layout_fn.is_relative() ) {
-        layout_fn = fs::current_path() / layout_fn;
-    }
-    std::cout << layout_fn.string() << "\n";
-
     Site site;
+
+    fs::path layout_fn = fs::absolute( filename ).lexically_normal();
     site.layout_dir = layout_fn.parent_path().string();
 
+    fs::path src_dir = fs::absolute( source ).lexically_normal();
+    site.source = src_dir.string();
+
+    fs::path target_dir = fs::absolute( target ).lexically_normal();
+    site.target = target_dir.string();
+
+    std::cout << "Layout file: " << layout_fn << "\n";
+    std::cout << "Source folder: " << site.source << "\n";
+    std::cout << "Target folder: " << site.target << "\n";
+
     if( !blog_src.empty() ) {
-        fs::path b_path( blog_src );
-        if( b_path.is_relative() ) {
-            b_path = fs::current_path() / b_path;
-        }
-        site.blog_dir = b_path.lexically_normal().string();
+        fs::path blog_dir = fs::absolute( blog_src ).lexically_normal();
+        site.blog_dir = blog_dir.string();
+        std::cout << "Blog folder: " << site.blog_dir << "\n";
         process_blog( site.layout_dir, site.blog_dir );
     }
 
     pt::ptree root;
     pt::read_json( layout_fn.string(), root );
-
-    fs::path s_path( source );
-    if ( s_path.is_relative() ) {
-        s_path = fs::current_path() / s_path;
-    }
-    site.source = s_path.lexically_normal().string();
-    std::cout << "Source folder: " << site.source << "\n";
-
-    fs::path t_path( target );
-    if ( t_path.is_relative() ) {
-        t_path = fs::current_path() / t_path;
-    }
-    site.target = t_path.lexically_normal().string();
-    std::cout << "Target folder: " << site.target << "\n";
 
     site.project = root.get<string>("project", "");
     site.sourceforge_url = root.get<string>( "sourceforge-url", "" );
