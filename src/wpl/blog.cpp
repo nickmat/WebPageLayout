@@ -110,6 +110,9 @@ namespace {
                 out << "\n}\n";
             }
             else {
+                if( path.extension() != ".md" ) {
+                    continue;
+                }
                 BlogHdr hdr;
                 read_blog_hdr( hdr, path );
 
@@ -138,8 +141,7 @@ void process_blog( const string& layout_dir, const string& blog_src )
     fs::path lay_path( layout_dir );
     fs::path md_path = lay_path / "markdown.json";
 
-    std::cout << lay_path << " [layout path]\n";
-    std::cout << md_path << " [markdown layout file]\n\n";
+    std::cout << "Blog layout: " << md_path << "\n";
 
     fs::ofstream mds( md_path );
     write_blog_layout( mds, blog_src, -1 );
