@@ -88,10 +88,6 @@ namespace {
     string convert_markdown( const string& filename )
     {
         string content = get_file_contents( filename );
-        size_t pos = content.find( "[Content:]" );
-        if( pos != string::npos ) {
-            content = content.substr( pos + 10 );
-        }
         std::stringstream in( content );
 
         std::shared_ptr<maddy::ParserConfig> config = std::make_shared<maddy::ParserConfig>();
@@ -136,9 +132,17 @@ string todays_date()
     return str.str();
 }
 
-string get_file_contents(const string& filename)
+string get_file_contents( const string& filename )
 {
-    std::ifstream in(filename);
+    std::ifstream in( filename );
+    std::stringstream sstr;
+    sstr << in.rdbuf();
+    return sstr.str();
+}
+
+string get_file_contents( const fs::path& path )
+{
+    std::ifstream in( path.string() );
     std::stringstream sstr;
     sstr << in.rdbuf();
     return sstr.str();

@@ -1,0 +1,19 @@
+[Home:] blog
+[Label:] Blogs
+[Title:] Blogs
+[Summary:] A collection of blogs on various topics.
+[/Summary:]
+
+[File:] How-to-Write-a-Blog
+[Label:] Creating a Blog
+[Subtitle:] How To Write A Blog
+[Summary:] A description of how to add a blog page
+and details of the type of markup that can be used.
+[/Summary:]
+
+[File:] Extending-Markdown
+[Label:] Extending md
+[Subtitle:] Extending Markdown
+[Summary:] Some additional markdown features especially for
+Glich websites.
+[/Summary:]

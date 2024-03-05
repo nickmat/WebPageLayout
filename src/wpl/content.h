@@ -27,6 +27,7 @@
 #define SRC_WPL_CONTENT_H_GUARD
 
 #include <string>
+#include <boost/filesystem.hpp>
 
 struct Content {
     std::string text;
@@ -35,6 +36,7 @@ struct Content {
 
 std::string todays_date();
 std::string get_file_contents( const std::string& filename );
+std::string get_file_contents( const boost::filesystem::path& filename );
 void get_content(
     Content& content, const std::string& filename, const std::string& src_fname );
 

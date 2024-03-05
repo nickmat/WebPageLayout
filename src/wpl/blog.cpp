@@ -37,99 +37,60 @@ namespace fs = boost::filesystem;
 
 using std::string;
 
+inline bool starts_with( const string& str, const string& match )
+{
+    if( str.length() < match.length() ) {
+        return false;
+    }
+    return std::equal( match.begin(), match.end(), str.begin() );
+}
+
 namespace {
 
-    struct BlogHdr {
-        string label;
-        string title;
-        string summary;
-    };
-
-    void read_blog_hdr( BlogHdr& hdr, fs::path path )
+    void write_blog_layout( std::ostream& out, fs::path& path )
     {
-        string filename = path.lexically_normal().string();
-        string text = get_file_contents( filename );
+        fs::path blog_index = path / "index.txt";
+        fs::ifstream in( blog_index );
 
-        size_t end = string::npos;
-        size_t pos = text.find( "[Label:]" );
-        if( pos != string::npos ) {
-            pos += 9; // include one space
-            end = text.find( "\n", pos );
-            if( end != string::npos ) {
-                hdr.label = text.substr( pos, end - pos );
+
+        bool home = false;
+        bool file = false;
+        bool content = false;
+        string markdown( ", \"markdown\": true }" );
+        for( string line; getline( in, line ); ) {
+            if( starts_with( line, "[Folder:] " ) ) {
+                string folder = line.substr( 10 );
+                write_blog_layout( out, path / folder );
             }
-        }
-
-        end = string::npos;
-        pos = text.find( "[Title:]" );
-        if( pos != string::npos ) {
-            pos += 9; // include one space
-            end = text.find( "\n", pos );
-            if( end != string::npos ) {
-                hdr.title = text.substr( pos, end - pos );
+            else if( starts_with( line, "[Home:] " ) && !home ) {
+                out << "{ \"folder\": \"" << line.substr( 8 ) << "\"";
+                home = true;
             }
-        }
-
-        end = string::npos;
-        pos = text.find( "[Summary:]" );
-        if( pos != string::npos ) {
-            pos += 11; // include one space
-            end = text.find( "[Content:]", pos );
-            if( end != string::npos ) {
-                hdr.summary = text.substr( pos, end - pos );
+            else if( starts_with( line, "[Label:] " ) ) {
+                out << ", \"label\": \"" << line.substr( 9 ) << "\"";
             }
-        }
-
-        if( hdr.label.empty() ) {
-            string fn = path.stem().string();
-            assert( fn.length() > 4 );
-            hdr.label = fn.substr( 4 );
-        }
-        if( hdr.title.empty() ) {
-            hdr.title = hdr.label;
-        }
-    }
-
-    void write_blog_layout( std::ostream& out, const string& blog_src, int level )
-    {
-        bool start_content = false;
-        if( level == 0 ) {
-            out << ", \"content\": [\n";
-            start_content = true;
-        }
-        for( const auto& file : fs::directory_iterator( blog_src ) ) {
-            fs::path path = file.path().lexically_normal();
-            std::cout << path << "\n";
-            if( fs::is_directory( path ) ) {
-                out << 
-                    "{\n \"folder\": " << path.filename() <<
-                    ", \"label\": " << path.filename() <<
-                    ", \"title\": \"Blogs\", \"subtitle\": \"Contents\" "
-                ;
-                write_blog_layout( out, path.string(), 0 );
-                out << "\n}\n";
+            else if( starts_with( line, "[Title:] " ) ) {
+                out << ", \"title\": \"" << line.substr( 9 ) << "\"";
             }
-            else {
-                if( path.extension() != ".md" ) {
-                    continue;
+            else if( starts_with( line, "[Subtitle:] " ) ) {
+                out << ", \"subtitle\": \"" << line.substr( 12 ) << "\"";
+            }
+            else if( starts_with( line, "[File:] " ) ) {
+                if( file ) {
+                    out << markdown << ",";
                 }
-                BlogHdr hdr;
-                read_blog_hdr( hdr, path );
-
-                if( level != 0 ) {
-                    out << ",\n";
+                else {
+                    out << ", \"content\": [";
+                    file = true;
                 }
-                out <<
-                    "  { \"name\": " << path.stem() << 
-                    ", \"label\": \"" << hdr.label <<
-                    "\", \"subtitle\": \"" << hdr.title <<
-                    "\", \"markdown\": true }"
-                    ;
-                level++;
+                out << "\n    { \"name\": \"" << line.substr( 8 ) << "\"";
             }
         }
-        if( start_content ) {
-            out << "\n ]";
+        if( file ) {
+            out << markdown << "\n  ]";
+        }
+        if( home ) {
+            out << "\n}\n";
         }
     }
 
@@ -140,11 +101,13 @@ void process_blog( const string& layout_dir, const string& blog_src )
 {
     fs::path lay_path( layout_dir );
     fs::path md_path = lay_path / "markdown.json";
+    fs::ofstream mds( md_path );
+
+    fs::path blog_dir( blog_src );
 
     std::cout << "Blog layout: " << md_path << "\n";
 
-    fs::ofstream mds( md_path );
-    write_blog_layout( mds, blog_src, -1 );
+    write_blog_layout( mds, blog_dir );
 }
 
 
