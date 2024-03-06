@@ -50,14 +50,14 @@ namespace {
     void write_blog_layout( std::ostream& out, fs::path& path )
     {
         string index_text;
-        fs::path blog_index = path / "index.txt";
-        fs::ifstream in( blog_index );
+        fs::ifstream in( path / "index.txt" );
 
         bool home = false;
         bool file = false;
         bool content = false;
         bool in_summary = false;
         string markdown( ", \"markdown\": true }" );
+        string label;
         for( string line; getline( in, line ); ) {
             if( in_summary ) {
                 if( starts_with( line, "[" ) ) {
@@ -77,6 +77,9 @@ namespace {
                 home = true;
             }
             else if( starts_with( line, "[Label:] " ) ) {
+                if( file ) {
+                    label = "#### " + line.substr( 9 ) + "\n";
+                }
                 out << ", \"label\": \"" << line.substr( 9 ) << "\"";
             }
             else if( starts_with( line, "[Title:] " ) ) {
@@ -97,6 +100,7 @@ namespace {
             }
             else if( starts_with( line, "[Summary:] " ) ) {
                 in_summary = true;
+                index_text += label;
                 index_text += line.substr( 11 ) + "\n";
             }
         }
@@ -104,7 +108,7 @@ namespace {
             out << markdown << "\n  ]";
         }
         if( home ) {
-            out << "\n" << markdown << "\n";
+            out << markdown << "\n";
         }
         if( !index_text.empty() ) {
             fs::ofstream index_md( path / "index.md" );
