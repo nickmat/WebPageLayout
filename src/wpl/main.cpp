@@ -63,6 +63,7 @@ int main( int argc, char* argv[] )
             return 0;
         }
 
+        std::cout << wm_version << "\n";
         if ( target.empty() ) {
             std::cerr << "Target directory required.\n\n" << desc;
             return 1;
