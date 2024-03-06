@@ -49,15 +49,25 @@ namespace {
 
     void write_blog_layout( std::ostream& out, fs::path& path )
     {
+        string index_text;
         fs::path blog_index = path / "index.txt";
         fs::ifstream in( blog_index );
-
 
         bool home = false;
         bool file = false;
         bool content = false;
+        bool in_summary = false;
         string markdown( ", \"markdown\": true }" );
         for( string line; getline( in, line ); ) {
+            if( in_summary ) {
+                if( starts_with( line, "[" ) ) {
+                    in_summary = false;
+                }
+                else {
+                    index_text += line + "\n";
+                    continue;
+                }
+            }
             if( starts_with( line, "[Folder:] " ) ) {
                 string folder = line.substr( 10 );
                 write_blog_layout( out, path / folder );
@@ -85,12 +95,20 @@ namespace {
                 }
                 out << "\n    { \"name\": \"" << line.substr( 8 ) << "\"";
             }
+            else if( starts_with( line, "[Summary:] " ) ) {
+                in_summary = true;
+                index_text += line.substr( 11 ) + "\n";
+            }
         }
         if( file ) {
             out << markdown << "\n  ]";
         }
         if( home ) {
-            out << "\n}\n";
+            out << "\n" << markdown << "\n";
+        }
+        if( !index_text.empty() ) {
+            fs::ofstream index_md( path / "index.md" );
+            index_md << index_text;
         }
     }
 
